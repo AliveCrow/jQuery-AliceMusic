@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  background-color: #f3f3f3;
+}
+
+nav {
+  height: 90px;
+}
+
+/*# sourceMappingURL=app.css.map */
