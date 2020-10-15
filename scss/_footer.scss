@@ -1,0 +1,17 @@
+@import "./var.scss";
+
+.footer{
+
+  background-color: $footer-bg-color;
+  height:100px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  padding-top: 30px;
+  a{
+    color: $nav-hover-color;
+    &:hover{
+      color: #ff4848;
+    }
+  }
+}

@@ -1,29 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
-    <meta name="author" content="grit" />
-    <link rel="stylesheet" href="./scss/dist/app.css" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1"/>
+    <meta name="author" content="grit"/>
+    <link rel="stylesheet" href="./scss/dist/app.css"/>
     <title>AliveMusic</title>
-  </head>
+    <style type="text/css">
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+    </style>
+</head>
 
-  <body>
-  <header>
-    <nav>
-      <ul>
-        <li>音乐馆</li>
-        <li>我的音乐</li>
-        <li>日推</li>
-        <li>排行榜</li>
-        <li>歌单</li>
-        <div>设置cookie</div>
-      </ul>
-    </nav>
-  </header>
-  <main></main>
-  <footer></footer>
+<body>
 
-  </body>
+<div id="container">
+    <header>
+        <div class="header_nav_bg"></div>
+        <nav>
+            <img class="logo" src="./logo.png" alt="">
+            <ul class="clearfix nav_ul">
+                <li class="header_nav active"><a>音乐馆</a></li>
+                <li class="header_nav"><a>我的音乐</a></li>
+                <li class="header_nav"><a>日推</a></li>
+                <li class="header_nav"><a>排行榜</a></li>
+                <li class="header_nav"><a>歌单</a></li>
+            </ul>
+            <div>
+                <input type="text" placeholder="搜索音乐, 歌手">
+            </div>
+            <a href="" class="set_cookie">设置cookie</a>
+            <form class="cookie_form">
+                <input type="text" placeholder="输入你的cookie">
+                <input type="button" value=设置>
+            </form>
+        </nav>
+    </header>
+    <main class="main">
+        <section class="home" >
+            <!--  轮播图-->
+            <section class="slider">
+                <div class="slider_move">
+                    <ul class="clearfix slider_ul">
+
+                    </ul>
+                </div>
+            </section>
+
+            <!--        新歌推荐-->
+            <section  class="new_song_recommend">
+                <div class="new_song_recommend_bg"></div>
+                <div class="new_song_leave">
+                    <h2>新歌推荐</h2>
+                    <div class="song_area">
+                        <ul class="clearfix song_area_ul">
+                            <li class="active"><a>最新</a></li>
+                            <li><a>内地</a></li>
+                            <li><a>港台</a></li>
+                            <li><a>欧美</a></li>
+                            <li><a>韩国</a></li>
+                            <li><a>日本</a></li>
+                        </ul>
+                    </div>
+                    <div class="song_list">
+                        <ul class="song_list_ul">
+                            <!--                        <li class="song_list_li">-->
+                            <!--                            <a>-->
+                            <!--                                <div>-->
+                            <!--                                    <img src="https://y.gtimg.cn/music/photo_new/T002R150x150M000003lkS001a64Bm_1.jpg%3Fmax_age=2592000"-->
+                            <!--                                         alt="">-->
+                            <!--                                </div>-->
+                            <!--                                <dl>-->
+                            <!--                                    <dt class="song_name">市地税局啊</dt>-->
+                            <!--                                    <dd class="singer">dsada</dd>-->
+                            <!--                                </dl>-->
+                            <!--                            </a>-->
+                            <!--                        </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section style="display:none" class="day_rec" >
+            <div class="day_top">
+                <img height="300px" src="http://qpic.y.qq.com/music_cover/jZUIYmdjpMC7X21oEkkTzIoKMm3e5hqNN7oVdCib9TPH7jkhiaPhQA8A/300?n=1" alt="">
+                <div class="day_top_text">
+                    <p>每日推荐</p>
+                    <p>cookie未设置</p>
+                </div>
+            </div>
+            <div class="day_bottom">
+                <p>歌曲列表:</p>
+                <ul>
+                    <li><a>
+                        <span>个人名</span>
+                        <span>作者</span>
+                        <span>时长</span>
+                    </a></li>
+                    <li><a>
+                        <span>个人名</span>
+                        <span>作者</span>
+                        <span>时长</span>
+                    </a></li>
+                    <li><a>
+                        <span>个人名</span>
+                        <span>作者</span>
+                        <span>时长</span>
+                    </a></li>
+                    <li><a>
+                        <span>个人名</span>
+                        <span>作者</span>
+                        <span>时长</span>
+                    </a></li>
+                    <li><a>
+                        <span>个人名</span>
+                        <span>作者</span>
+                        <span>时长</span>
+                    </a></li>
+                    <li><a>
+                        <span>个人名</span>
+                        <span>作者</span>
+                        <span>时长</span>
+                    </a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="rank">
+            <h2>排行榜</h2>
+            <ul>
+                <li>
+                    <div>
+                        <a>巅峰榜</a>
+                        <a>热歌</a>
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                        </ul>
+                    </div>
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </section>
+
+
+    </main>
+
+</div>
+<!--播放器-->
+<div id="player" class="hidden">
+</div>
+
+<footer class="footer">
+    <span> 2020 <a href="https://dreamsakula.top/">Grit</a></span>
+    <br>
+    musicApi Powered by <a href="https://github.com/jsososo">jsososo</a>
+</footer>
+<script src="./JavaScript/app.js"></script>
+</body>
 </html>

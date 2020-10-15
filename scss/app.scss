@@ -1,2 +1,23 @@
 
-@import "reset","var","header";
+@import "reset","var","header",'slider','MusicHall','footer','player','day_rec';
+
+#container{
+  width:1200px;
+  min-width:1200px;
+  margin-left:auto;
+  margin-right: auto;
+}
+.clearfix:after{
+  content:'';
+  display:block;
+  clear:both;
+}
+
+.active{
+  a{
+    color: $nav-hover-color;
+  }
+}
+//.hidden{
+//  visibility: hidden;
+//}
