@@ -1,5 +1,5 @@
 
-@import "reset","var","header",'slider','MusicHall','footer','player','day_rec';
+@import "reset","var","header",'slider','MusicHall','footer','player','day_rec','rank','search','my_music';
 
 #container{
   width:1200px;
@@ -7,17 +7,40 @@
   margin-left:auto;
   margin-right: auto;
 }
+
 .clearfix:after{
   content:'';
   display:block;
   clear:both;
 }
-
 .active{
   a{
     color: $nav-hover-color;
   }
 }
-//.hidden{
-//  visibility: hidden;
-//}
+
+
+#load_ico{
+  width: 100%;
+  .loading{
+    width: 100%;
+    font-size: 50px;
+    margin: 20px auto;
+  }
+  .load_rotate{
+    animation: loading 1s cubic-bezier(.68,.33,.68,.51) infinite;
+  }
+  @keyframes loading {
+    0%{
+      transform: rotate(0);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+}
+.song_isvip{
+  display: inline;
+  color: $warning!important;
+  margin-left: 10px;
+}

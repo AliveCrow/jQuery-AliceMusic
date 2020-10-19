@@ -6,7 +6,7 @@
     position:absolute;
     width: 100px;
     height:100px;
-    .icon{
+    &>.icon{
       font-size:50px;
       position:absolute;
       top: 50%;
@@ -46,7 +46,7 @@
   }
   position:fixed;
   bottom:0;
-  height:100px;
+  height:90px;
   width: 100%;
   background-color: $footer-bg-color;
   z-index:11;

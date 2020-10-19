@@ -1,10 +1,12 @@
 @import "./var.scss";
 
 .footer{
-
+  position:absolute;
+  z-index:10;
   background-color: $footer-bg-color;
-  height:100px;
+  height:90px;
   width: 100%;
+  bottom: -100px;
   text-align: center;
   color: #fff;
   padding-top: 30px;

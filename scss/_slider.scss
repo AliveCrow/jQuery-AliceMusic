@@ -6,6 +6,10 @@
     position: relative;
     overflow: hidden;
     }
+  .slider_move{
+    width: 1200px;
+    height: 480px;
+  }
     .slider_ul {
       position:relative;
       width: $slider_img_width*6;
@@ -13,7 +17,6 @@
         float: left;
         img {
           width: $slider_img_width;
-
         }
       }
     }

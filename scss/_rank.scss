@@ -1,0 +1,239 @@
+@import "var";
+
+.rank {
+  overflow: hidden;
+  left: 0;
+  z-index: 11;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat;
+    background-image: url(http://qiniu.dreamsakula.top/images/20201016005318.png);
+    background-size: 30%;
+    filter: blur(7px);
+    z-index: -1;
+  }
+
+  color: $text-color;
+
+  a {
+    color: #fff;
+  }
+
+  h2 {
+    text-align: center;
+    margin: 50px;
+  }
+
+  .rank_ul_1, .rank_ul_2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  .rank_ul_1 {
+    //max-width: 1200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    transition: all .7s ease .1s;
+    .rank_li_1 {
+      overflow: hidden;
+      position:relative;
+      transition: all .7s ease .2s;
+      background-size: auto 150%;
+      background-position: 0;
+      background-repeat: no-repeat;
+      background-color: rgba($warning, .2);
+      flex-grow: 1;
+      flex-basis: 1px;
+      .rank_li_bgimg::before{
+        content: '';
+        height:100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(253, 215, 214,.5);
+        transition: all .7s ease .1s;
+      }
+      &:hover{
+        flex-grow: 3;
+        .rank_li_bgimg::before{
+          background-color: rgba(0, 0, 0,.6);
+        }
+      }
+      &:hover .rank_title {
+        a {
+          color: #fff;
+          margin-top: 100px;
+          transform: scale(1);
+        }
+      }
+      &:hover .rank_ul_2{
+        opacity: 1 !important;
+      }
+      &:hover .rank_li_2 > a > span {
+        color: #fff;
+        opacity: 1 !important;
+        z-index: 9999;
+      }
+    }
+    .rank_title {
+      display: flex;
+      flex-direction: column;
+      & > a {
+        text-align: center;
+        transition: all .2s ease;
+        transform-origin: top center;
+        display: block;
+        font-size: 1rem;
+        margin-top: 200px;
+        margin-bottom: 50px;
+        cursor: pointer;
+        &:before{
+          content: attr(data-content);
+          margin-bottom: 5px;
+          display: block;
+          font-size: .8em;
+          font-weight: 300;
+          cursor: default;
+        }
+      }
+      .rank_ul_2 {
+        font-size: 1rem;
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        opacity: 0;
+        flex-direction: column;
+        margin-top: 100px;
+        transition: all .5s linear;
+        .rank_li_2 {
+          margin: 20px 20px;
+          overflow: hidden;
+          a {
+            font-weight: 300;
+            cursor: pointer;
+            position: relative;
+            z-index: 999;
+            transform: translate(-50%,-50%);
+
+            & ~ span {
+              transition: all .4s ease;
+              opacity: 0;
+              margin: 0 auto;
+              display: block;
+            }
+
+            & > span:nth-child(1) {
+              display: block;
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+
+  //#fdd7d6
+  //#acd1c9
+  //#f2a713
+  //#fffccc
+
+
+  .ablum_song{
+    margin: 0 auto 50px;
+    display:flex;
+    flex-direction: column;
+    max-width: 1200px;
+    .day_top{
+      img{
+        //border:1px solid $input-border-color;
+        border-radius: 3px;
+        margin: 20px;
+        height:200px;
+      }
+      display:flex;
+      flex-direction: row;
+      align-items:flex-end;
+      .day_top_text{
+        margin: 20px;
+      }
+      p:first-child{
+        font-size:2rem;
+      }
+      p:nth-child(2){
+        color: $warning;
+        font-weight:300;
+        font-size:.8rem;
+        margin: 10px 0;
+      }
+    }
+    .day_bottom{
+      margin: 20px 0;
+      font-size:$nav-fontSize;
+      p{
+        margin: 10px 0;
+        font-size:1.5rem;
+      }
+      ul{
+        display: inline-block;
+        width: 100%;
+        //border:1px solid $input-border-color;
+        border-radius:3px;
+        li{
+          height:70px;
+          a{
+            color: #262626;
+            font-size: 1rem;
+            cursor: default;
+            line-height:70px;
+            display:flex;
+            justify-content:space-between;
+            &:hover{
+              color: $nav-hover-color;
+            }
+            span{
+              font-weight:300;
+              &:nth-child(1){
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+                display: inline;
+                max-width:500px;
+                width:500px;
+                margin-left:30px;
+              }
+              &:nth-child(2){
+                color:$song_list_font-size;
+              }
+              &:nth-child(3){
+                color:$song_list_font-size;
+                margin-right: 50px;
+
+              }
+            }
+          }
+          &:nth-child(2n){
+            background-color: $list_one_color;
+          }
+          &:nth-child(2n+1){
+            background-color: $list_two_color;
+          }
+
+        }
+
+      }
+    }
+  }
+
+
+}

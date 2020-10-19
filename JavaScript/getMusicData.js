@@ -21,6 +21,7 @@ export class GetMusicData {
 
 			},
 			complete:(res)=>{
+				console.log (res)
 				this.albumid = res.responseJSON.data.track_info.album.mid
 				this.PicUrl = this.musicPicUrl(this.albumid)
 				this.songName = res.responseJSON.data.track_info.name
@@ -34,12 +35,11 @@ export class GetMusicData {
 		$.ajax({
 			method: "GET",
 			url: 'http://localhost:3300' +
-				`/song/urls?id=${songmid}`,
+				`/song/url?id=${songmid}`,
 			success: res => {
-
 			},
 			complete:(res)=>{
-				this.PlayerUrl = res.responseJSON.data[songmid]
+				this.PlayerUrl = res.responseJSON.data
 				let player = new Player(this)
 				player.createAudio()
 			}

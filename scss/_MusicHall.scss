@@ -2,12 +2,12 @@
 
 .new_song_recommend{
   text-align: center;
-  height:500px;
+  min-height: 550px;
   .new_song_recommend_bg{
     position: absolute;
     left: 0;
     width: 100vw;
-    height:500px;
+    height: 550px;
     background: rgb(255,255,255);
     background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(240,240,240,1) 100%);
     z-index:1;

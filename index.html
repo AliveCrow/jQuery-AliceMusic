@@ -27,15 +27,15 @@
         <nav>
             <img class="logo" src="./logo.png" alt="">
             <ul class="clearfix nav_ul">
-                <li class="header_nav active"><a>音乐馆</a></li>
-                <li class="header_nav"><a>我的音乐</a></li>
-                <li class="header_nav"><a>日推</a></li>
-                <li class="header_nav"><a>排行榜</a></li>
-                <li class="header_nav"><a>歌单</a></li>
+                <li data-tab="home" class="header_nav active"><a>音乐馆</a></li>
+                <li data-tab="my_music" class="header_nav"><a>我的音乐</a></li>
+                <li data-tab="day_rec" class="header_nav"><a>日推</a></li>
+                <li data-tab="rank" class="header_nav"><a>排行榜</a></li>
+                <!--                <li class="header_nav"><a>歌单</a></li>-->
             </ul>
-            <div>
-                <input type="text" placeholder="搜索音乐, 歌手">
-            </div>
+            <form class="search_form">
+                <input type="text" name="key" placeholder="搜索音乐">
+            </form>
             <a href="" class="set_cookie">设置cookie</a>
             <form class="cookie_form">
                 <input type="text" placeholder="输入你的cookie">
@@ -44,120 +44,10 @@
         </nav>
     </header>
     <main class="main">
-        <section class="home" >
-            <!--  轮播图-->
-            <section class="slider">
-                <div class="slider_move">
-                    <ul class="clearfix slider_ul">
-
-                    </ul>
-                </div>
-            </section>
-
-            <!--        新歌推荐-->
-            <section  class="new_song_recommend">
-                <div class="new_song_recommend_bg"></div>
-                <div class="new_song_leave">
-                    <h2>新歌推荐</h2>
-                    <div class="song_area">
-                        <ul class="clearfix song_area_ul">
-                            <li class="active"><a>最新</a></li>
-                            <li><a>内地</a></li>
-                            <li><a>港台</a></li>
-                            <li><a>欧美</a></li>
-                            <li><a>韩国</a></li>
-                            <li><a>日本</a></li>
-                        </ul>
-                    </div>
-                    <div class="song_list">
-                        <ul class="song_list_ul">
-                            <!--                        <li class="song_list_li">-->
-                            <!--                            <a>-->
-                            <!--                                <div>-->
-                            <!--                                    <img src="https://y.gtimg.cn/music/photo_new/T002R150x150M000003lkS001a64Bm_1.jpg%3Fmax_age=2592000"-->
-                            <!--                                         alt="">-->
-                            <!--                                </div>-->
-                            <!--                                <dl>-->
-                            <!--                                    <dt class="song_name">市地税局啊</dt>-->
-                            <!--                                    <dd class="singer">dsada</dd>-->
-                            <!--                                </dl>-->
-                            <!--                            </a>-->
-                            <!--                        </li>-->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </section>
-
-        <section style="display:none" class="day_rec" >
-            <div class="day_top">
-                <img height="300px" src="http://qpic.y.qq.com/music_cover/jZUIYmdjpMC7X21oEkkTzIoKMm3e5hqNN7oVdCib9TPH7jkhiaPhQA8A/300?n=1" alt="">
-                <div class="day_top_text">
-                    <p>每日推荐</p>
-                    <p>cookie未设置</p>
-                </div>
-            </div>
-            <div class="day_bottom">
-                <p>歌曲列表:</p>
-                <ul>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="rank">
-            <h2>排行榜</h2>
-            <ul>
-                <li>
-                    <div>
-                        <a>巅峰榜</a>
-                        <a>热歌</a>
-                        <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                        </ul>
-                    </div>
-                </li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </section>
-
+        <!--&lt;!&ndash;        搜索&ndash;&gt;-->
+        <!--        <section data-tab="search" class="search"></section>-->
 
     </main>
-
 </div>
 <!--播放器-->
 <div id="player" class="hidden">

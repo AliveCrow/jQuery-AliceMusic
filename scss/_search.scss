@@ -1,18 +1,15 @@
-@import "./var.scss";
+@import "var";
 
-.day_rec{
+.search{
   display:flex;
   flex-direction: column;
-  margin-bottom:30px;
-  .day_top{
-    display:flex;
-    flex-direction: row;
-    align-items:flex-start;
-    .day_top_text{
-      margin-left: 100px;
-      margin-top: 30px;
+  height: 100%;
+  margin:30px;
 
-    }
+  .search_top_text{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     p:first-child{
       font-size:2rem;
     }
@@ -48,17 +45,19 @@
             color: $nav-hover-color;
           }
           span{
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space:nowrap;
             font-weight:300;
+            //border: 1px solid red;
             &:nth-child(1){
-              min-width:600px;
-              width:600px;
               overflow: hidden;
-              margin-left: 20px;
+              text-overflow:ellipsis;
+              white-space: nowrap;
+              display: inline;
+              max-width:500px;
+              width:500px;
+              margin-left:30px;
             }
             &:nth-child(2){
+              width: 100px;
               color:$song_list_font-size;
             }
             &:nth-child(3){
@@ -66,7 +65,7 @@
               margin-right: 50px;
 
             }
-            display: inline-block;
+            //display: inline-block;
           }
         }
         &:nth-child(2n){

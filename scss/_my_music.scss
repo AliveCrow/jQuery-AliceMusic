@@ -1,0 +1,175 @@
+@import "var";
+
+.my_music{
+  width: 1200px;
+  margin: 0 auto;
+
+  .mymusic_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+    img{
+      height: 120px;
+      border: 3px solid #73ac00;
+        border-radius: 50%;
+    }
+    .avatar{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .vip_container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 5px;
+      }
+      .is_vip{
+        font-size: 30px;
+      }
+    }
+    .avatar~ul{
+      background: rgb(255,255,255);
+      background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(240,240,240,1) 100%);
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      .active{
+        background-color:$nav-hover-color;
+        color: #fff;
+      }
+      li{
+        padding: 5px 20px;
+        &:hover{
+          background-color:$nav-hover-color;
+          color: #fff;
+        }
+
+      }
+    }
+  }
+
+  .my_music_songlist{
+      min-height: 500px;
+
+    .diss_list{
+      ul{
+        display: flex;
+        flex-direction: row;
+        li{
+          height: 150px;
+          width: 150px;
+          background-color: #ff4848;
+          margin: 50px 25px;
+          img{
+            height: 100%;
+            display: inline-block;
+            border-radius: 5px;
+          }
+          span{
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            text-align: center;
+            margin: 3px;
+          }
+        }
+      }
+    }
+  }
+
+  .ablum_song{
+    margin: 0 auto 50px;
+    display:flex;
+    flex-direction: column;
+    max-width: 1200px;
+    .day_top{
+      img{
+        //border:1px solid $input-border-color;
+        border-radius: 3px;
+        margin: 20px;
+        height:200px;
+      }
+      display:flex;
+      flex-direction: row;
+      align-items:flex-end;
+      .day_top_text{
+        margin: 20px;
+      }
+      p:first-child{
+        font-size:2rem;
+      }
+      p:nth-child(2){
+        color: $warning;
+        font-weight:300;
+        font-size:.8rem;
+        margin: 10px 0;
+      }
+    }
+    .day_bottom{
+      margin: 20px 0;
+      font-size:$nav-fontSize;
+      p{
+        margin: 10px 0;
+        font-size:1.5rem;
+      }
+      ul{
+        display: inline-block;
+        width: 100%;
+        //border:1px solid $input-border-color;
+        border-radius:3px;
+        li{
+          height:70px;
+          a{
+            color: #262626;
+            font-size: 1rem;
+            cursor: default;
+            line-height:70px;
+            display:flex;
+            justify-content:space-between;
+            &:hover{
+              color: $nav-hover-color;
+            }
+            span{
+              font-weight:300;
+              &:nth-child(1){
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+                display: inline;
+                max-width:500px;
+                width:500px;
+                margin-left:30px;
+              }
+              &:nth-child(2){
+                color:$song_list_font-size;
+              }
+              &:nth-child(3){
+                color:$song_list_font-size;
+                margin-right: 50px;
+
+              }
+            }
+          }
+          &:nth-child(2n){
+            background-color: $list_one_color;
+          }
+          &:nth-child(2n+1){
+            background-color: $list_two_color;
+          }
+
+        }
+
+      }
+    }
+  }
+
+
+
+}
