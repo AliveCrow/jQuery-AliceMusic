@@ -1,7 +1,6 @@
 @import './var';
 
 #player{
-
   .change_state_btn{
     position:absolute;
     width: 100px;
@@ -63,6 +62,59 @@
     padding-bottom:20px;
     width: 100%;
     padding-right: 10px;
+    .player_right_top{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .player_right_top_quote{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .expansion{
+        font-size: 20px;
+        margin-right: 10px;
+        margin-top: -10px;
+          fill: #fff;
+        &:hover{
+          fill: $nav-hover-color;
+        }
+      }
+      .volume_group{
+        position: relative;
+      }
+      .volume{
+        font-size: 20px;
+        margin-left: 10px;
+        fill: $nav-hover-color;
+        &:hover{
+          fill: $warning;
+        }
+      }
+      input[type=range] {
+        position: relative;
+        -webkit-appearance:none;
+        width:100px;
+        height:4px;
+        outline:0;
+        background:none;
+        background:-webkit-linear-gradient($nav-hover-color, #2EE3F7) no-repeat, #fff;
+        background-size: 10% 100%;
+        &::-webkit-slider-thumb {
+          -webkit-appearance:none;
+          position:relative;
+          height:12px;
+          width: 12px;
+          border:0;
+          border-radius:50%;
+          background:url('http://qiniu.dreamsakula.top/images/20201020212314.png')no-repeat;
+          background-size:100%;
+          cursor:pointer;
+        }
+      }
+
+    }
+
   }
   .song_msg{
     color: #fff;
@@ -83,11 +135,35 @@
         font-weight:300;
         margin: 5px;
       }
+      .music_progress{
+        position: relative;
+        -webkit-appearance:none;
+        width:100%;
+        height:2px;
+        outline:0;
+        background:none;
+        background:-webkit-linear-gradient($nav-hover-color, #2EE3F7) no-repeat, #fff;
+        background-size: 0 100%;
+        border-radius: 0;
+        &::-webkit-slider-thumb {
+          -webkit-appearance:none;
+          position:relative;
+          height:8px;
+          width: 8px;
+          border:0;
+          background:url('http://qiniu.dreamsakula.top/images/20201020212314.png')no-repeat;
+          background-size:100%;
+          cursor:default;
+          opacity: 0;
+          transition: all .1s linear .05s;
+        }
+      }
       .prograss_bar{
         width:100%;
         overflow: hidden;
         background-color: #fff;
         height:2px;
+
         .prograss_blue{
           height:100%;
           width:100%;
@@ -98,7 +174,14 @@
     }
 
   }
-
-
 }
+//<svg t="1603208635643" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4813" width="200" height="200"><path d="M448 554.666667 149.333333 554.666667c-12.8 0-21.333333 8.533333-21.333333 21.333333 0 12.8 8.533333 21.333333 21.333333 21.333333l247.466667 0L49.066667 945.066667C44.8 949.333333 42.666667 953.6 42.666667 960c0 12.8 8.533333 21.333333 21.333333 21.333333 6.4 0 10.666667-2.133333 14.933333-6.4L426.666667 627.2 426.666667 874.666667c0 12.8 8.533333 21.333333 21.333333 21.333333s21.333333-8.533333 21.333333-21.333333L469.333333 576C469.333333 563.2 460.8 554.666667 448 554.666667zM981.333333 64c0-12.8-8.533333-21.333333-21.333333-21.333333-6.4 0-10.666667 2.133333-14.933333 6.4L597.333333 396.8 597.333333 149.333333c0-12.8-8.533333-21.333333-21.333333-21.333333s-21.333333 8.533333-21.333333 21.333333l0 298.666667c0 12.8 8.533333 21.333333 21.333333 21.333333l298.666667 0c12.8 0 21.333333-8.533333 21.333333-21.333333s-8.533333-21.333333-21.333333-21.333333L627.2 426.666667 974.933333 78.933333C979.2 74.666667 981.333333 70.4 981.333333 64z" p-id="4814" fill="#ffffff"></path></svg>
 
+#player_all{
+  height: 100%;
+  background-color: $footer-bg-color;
+  position: absolute;
+  width: 100vw;
+  z-index: 10;
+  top: 0;
+}

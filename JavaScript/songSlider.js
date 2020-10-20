@@ -48,7 +48,7 @@ export class SongSlider {
 			area = $(this)
 				.index()
 			if(prev === area){
-
+				_this.load.remove()
 			}else {
 				prev = area
 				$(this)
@@ -62,6 +62,7 @@ export class SongSlider {
 	}
 
 	render(index) {
+		let _this = this
 		$.ajax({
 			method: "GET",
 			url: 'http://localhost:3300' +
@@ -79,14 +80,32 @@ export class SongSlider {
 					$(this.template(picUrl, null, item))
 						.appendTo($(this.container))
 				})
-				$(`.song_mid`).on('click',(e)=>{
-					let songmid = e.currentTarget.dataset.songmid
-					let song = new GetMusicData(songmid)
-					song.getData(songmid)
+				let on =  this.throttle(function (e){
+							let song = new GetMusicData (_this.songmid)
+							song.getData (_this.songmid)
+				},1500)
+				$ (`.song_mid`).on ('click', (e)=>{
+					this.songmid = e.currentTarget.dataset.songmid
+					on()
 				})
 			}
 		})
 
+	}
+	throttle(func, wait) {
+		let _this = this
+		let prev, timer
+		return function fn() {
+			let curr = Date.now()
+			let diff = curr - prev
+			if (!prev || diff >= wait) {
+				func()
+				prev = curr
+			} else if (diff < wait) {
+				clearTimeout(timer)
+				timer = setTimeout(fn, wait - diff)
+			}
+		}
 	}
 }
 

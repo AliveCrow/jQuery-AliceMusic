@@ -30,14 +30,14 @@ export class ImgSlider {
 		this.stop()
 		this.intervalId = setInterval(()=>{
 			this.scroll()
-		}, 1500)
+		}, 2000)
 	}
 
 	scroll(keyframes, options) {
 		if (this.index <  this.length - 1) {
 			this.index += 1
 			$ (this.container)
-				.animate ({left: `${-1200 * this.index}px`},"nomal");
+				.animate ({left: `${-1200 * this.index}px`},"2000");
 		} else {
 			this.index = 1
 			$ (this.container)
@@ -65,7 +65,6 @@ export class ImgSlider {
 			success: (res)=>{
 				for(let i=0;i<res.data.length;i++){
 					$(this.template(res.data[i].picUrl,res.data[i].h5Url)).appendTo($(this.container))
-					// console.log ($('.slider_ul_li').length)
 				}
 				this.sliderInit();
 			}

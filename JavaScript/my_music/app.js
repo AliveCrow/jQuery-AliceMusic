@@ -87,7 +87,7 @@ export class Mymusic{
 				url:`http://localhost:3300/user/cookie`,
 				success:res=>{
 					this.qq = res.data.userCookie.uin
-					console.log (this.qq)
+					// console.log (this.qq)
 					if(!this.qq){
 						this.Tip.template('还没有设置cookie(⊙o⊙)…','waring')
 

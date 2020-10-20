@@ -6,6 +6,7 @@
           content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1"/>
     <meta name="author" content="grit"/>
+    <link rel="shortcut icon" href="http://qiniu.dreamsakula.top/images/20201021001407.png">
     <link rel="stylesheet" href="./scss/dist/app.css"/>
     <title>AliveMusic</title>
     <style type="text/css">
@@ -18,7 +19,6 @@
         }
     </style>
 </head>
-
 <body>
 
 <div id="container">
@@ -36,11 +36,14 @@
             <form class="search_form">
                 <input type="text" name="key" placeholder="搜索音乐" autocomplete="off">
             </form>
-            <span    class="set_cookie">设置cookie</span>
-            <form class="cookie_form" >
-                <input type="text" name="cookie" placeholder="登录y.qq.com后 在控制台输入 document.cookie，将打印的字符串粘贴进来" autocomplete="off">
-                <input type="submit" value=设置>
-            </form>
+            <span    class="set_cookie">
+                设置cookie
+<!--                <button class="delete_cookie"></button>-->
+            </span>
+                <form class="cookie_form" >
+                    <input type="text" name="cookie" placeholder="登录y.qq.com后 在控制台输入 document.cookie，将打印的字符串粘贴进来" autocomplete="off">
+                    <input type="submit" value=设置>
+                </form>
         </nav>
     </header>
     <main class="main">
@@ -50,8 +53,13 @@
     </main>
 </div>
 <!--播放器-->
-<div id="player" class="hidden">
+<div id="player">
 </div>
+<!--<div id="player_all" >-->
+<!--    <div>-->
+
+<!--    </div>-->
+<!--</div>-->
 <footer class="footer">
     <span> 2020 <a href="https://dreamsakula.top/">Grit</a></span>
     <br>

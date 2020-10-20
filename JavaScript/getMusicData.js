@@ -12,6 +12,7 @@ export class GetMusicData {
 		this.PicUrl = ''
 		this.singerName = ''
 		this.songName = ''
+		this.volume= 0
 		this.pay_play = false
 		this.loadover = false
 	}
@@ -27,6 +28,7 @@ export class GetMusicData {
 				this.pay_play = res.data.track_info.pay.pay_play
 				this.songName = res.data.track_info.name
 				this.singerName = res.data.track_info.singer[0].name
+				this.volume = res.data.track_info.volume.peak
 				this.musicPlayUrl(songmid)
 				if(load){
 					load.remove(el)
@@ -49,13 +51,8 @@ export class GetMusicData {
 				}
 				this.PlayerUrl = res.data
 				let player = new Player(this)
-				player.createAudio()
+				player.createAudio(this.volume)
 				$('.load_ico').hide()
-
-			},
-			complete:(res)=>{
-				// responseJSON: {result: 400, errMsg: "获取播放链接出错"}
-
 			}
 		})
 
