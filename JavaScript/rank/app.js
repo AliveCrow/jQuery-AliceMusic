@@ -11,6 +11,7 @@ export class RenderRank {
 		this.data = []
 		this.initTime = null
 		this.load= new Load (slot, true)
+		this.load.template()
 		this.SongList
 	}
 
@@ -84,6 +85,7 @@ export class RenderRank {
 			let  topid= e.target.dataset.topid
 			let imgurl = e.target.dataset.imgurl
 			 _this.load = new Load ('.rank', true)
+			_this.load.template()
 			_this.getSongMid(topid,null,imgurl)
 		})
 	}
@@ -104,7 +106,7 @@ export class RenderRank {
 					this.amblumSongList = res.data
 					this.SongList = new SongList('.rank',this.amblumSongList,this.data)
 					this.SongList.template(imgurl)
-					$('.rank>#load_ico').fadeOut()
+					$('.rank>.load_ico').fadeOut()
 				}
 
 			}

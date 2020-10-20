@@ -15,7 +15,6 @@ export class Search {
 		this.isonly = false
 		this.load
 		this.over = `<p class="load_over" style="text-align: center;font-size:1rem">没有歌曲了</p>`
-
 	}
 
 	template() {
@@ -37,6 +36,7 @@ export class Search {
 		$('.day_bottom').append(this.over)
 		$('.load_over').hide()
 		this.load = new Load('.day_bottom')
+		this.load.template()
 		this.load.render()
 	}
 	init() {
@@ -50,6 +50,7 @@ export class Search {
 			this.getData(keyword,1)
 			this.pageNo = 1
 			this.scrollLoad()
+
 		})
 	}
 	formatTime(time){
@@ -57,10 +58,10 @@ export class Search {
 		let sec = Math.floor(time%60)
 		if(min<10)min = '0'+min
 		if(sec<10)sec = '0'+sec
-
 		return `${min}:${sec}`
 	}
 	getData(keyword,pageNo =1) {
+		let _this = this
 		$.ajax ({
 			method: 'GET',
 			url: 'http://localhost:3300' + `/search?t=0&key=${keyword}&pageSize=20&pageNo=${pageNo}`,
@@ -84,10 +85,12 @@ export class Search {
                 </li>`
 				}).join('')
 				$('.day_bottom_ul').append(a)
-				$('.search_song_li').on('click',(e)=>{
+				$('.search_song_li').on('click',function(e){
+					let load = new Load('',true)
+					load.template(this)
 					let songmid = e.currentTarget.dataset.singmid
 					let song = new GetMusicData(songmid)
-					song.getData(songmid)
+					song.getData(songmid,load,this)
 				})
 			}
 		})

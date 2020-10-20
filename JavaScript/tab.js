@@ -3,6 +3,8 @@ import {ImgSlider} from "./imgSlider";
 import {SongSlider} from "./songSlider";
 import {RenderRank} from "./rank/app";
 import {Mymusic} from './my_music/app'
+import {DayRec} from "./day_rec/app"
+import {Tip} from "./tip/app";;
 
 export class Tab {
 	constructor(selector) {
@@ -15,6 +17,11 @@ export class Tab {
 		this.root = $ (`.home`)
 		this.slider = new ImgSlider ('.slider_ul', '.slider_ul li')
 		this.songSlider = new SongSlider ('.song_area_ul', '.song_list_ul')
+		this.Tip = new Tip()
+		this.uin
+		this.qm_keyst
+		this.getCookie()
+
 	}
 
 	activeLi() {
@@ -23,7 +30,6 @@ export class Tab {
 		let _this = this
 		$ (_this.selector)
 			.click (function (e) {
-				console.log (_this.currentTab, _this.prevTab, _this.clickTab)
 				if ($ ('.search').length !== 0) {
 					$ ('.search')
 						.remove ()
@@ -51,6 +57,12 @@ export class Tab {
 					$ ('.main')
 						.children ()
 						.remove ()
+					if(_this.showPage=== 'my_music' ||_this.showPage==='day_rec'){
+						if(!_this.qm_keyst || !_this.uin){
+							_this.Tip.template('还没有设置cookie(⊙o⊙)…','waring')
+							return
+						}
+					}
 					_this.renderHtml (_this.showPage)
 					_this.renderJs.call (_this)
 				} else {
@@ -65,6 +77,16 @@ export class Tab {
 	renderJs() {
 		this.slider.render ()
 		this.songSlider.decideArea ()
+	}
+	getCookie(){
+		$.ajax({
+			method:'GET',
+			url:`http://localhost:3300/user/cookie`,
+			success:res=>{
+				this.qm_keyst = res.data.userCookie.qm_keyst
+				this.uin = res.data.userCookie.uin
+			}
+		})
 	}
 
 	renderHtml(type) {
@@ -135,55 +157,14 @@ export class Tab {
 
 			case 'day_rec':
 				text = `
-        <section  data-tab="day_rec"  class="day_rec">
-			<div class="day_top">
-                <img height="260px"
-                     src="http://qpic.y.qq.com/music_cover/jZUIYmdjpMC7X21oEkkTzIoKMm3e5hqNN7oVdCib9TPH7jkhiaPhQA8A/300?n=1"
-                     alt="">
-                <div class="day_top_text">
-                    <p>每日推荐</p>
-                    <p>cookie未设置</p>
-                </div>
-            </div>
-            <div class="day_bottom">
-                <p>歌曲列表:</p>
-                <ul>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                    <li><a>
-                        <span>个人名</span>
-                        <span>作者</span>
-                        <span>时长</span>
-                    </a></li>
-                </ul>
-            </div>
-		</section>
+       			 <section  data-tab="day_rec"  class="day_rec">
+
+				</section>
 			`
 				$ (text)
 					.appendTo (`.main`)
+				let dayRec = new DayRec('.day_rec')
+				dayRec.render()
 				break
 
 			case 'rank':

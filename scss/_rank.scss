@@ -1,8 +1,10 @@
 @import "var";
 
 .rank {
-  overflow: hidden;
+  position: absolute;
   left: 0;
+  overflow: hidden;
+  width: 100vw;
   z-index: 11;
   &::before {
     content: '';
@@ -58,7 +60,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: rgba(253, 215, 214,.5);
+        background-color: rgba(255, 255, 255,.1);
         transition: all .7s ease .1s;
       }
       &:hover{

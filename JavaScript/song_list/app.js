@@ -45,7 +45,6 @@ export class SongList {
 
 		`
 		}
-		console.log ($(this.slot),this.slot)
 		$(this.slot).append(html)
 		this.render()
 	}
@@ -80,9 +79,11 @@ export class SongList {
 
 	play(songmid){
 		$('.song_list').on('click',function (e){
+			let load = new Load('',true)
+			load.template(this)
 			let songmid = e.currentTarget.dataset.songmid
 			let song = new GetMusicData(songmid)
-			song.getData(songmid)
+			song.getData(songmid,load,this)
 		})
 
 	}

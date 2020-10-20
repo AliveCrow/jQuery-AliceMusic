@@ -6,6 +6,7 @@
   min-width:1200px;
   margin-left:auto;
   margin-right: auto;
+  overflow: hidden;
 }
 
 .clearfix:after{
@@ -20,7 +21,7 @@
 }
 
 
-#load_ico{
+.load_ico{
   width: 100%;
   .loading{
     width: 100%;
@@ -43,4 +44,18 @@
   display: inline;
   color: $warning!important;
   margin-left: 10px;
+}
+.tip{
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translate(-50%,0);
+  z-index: 51;
+  border-radius: 2px;
+  text-align: center;
+  background-color: $warning;
+  color: #fff;
+  padding: 15px;
+  box-shadow:  0 0 6px rgba(#000,.4);
+  max-width: 400px;
 }

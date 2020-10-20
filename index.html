@@ -34,12 +34,12 @@
                 <!--                <li class="header_nav"><a>歌单</a></li>-->
             </ul>
             <form class="search_form">
-                <input type="text" name="key" placeholder="搜索音乐">
+                <input type="text" name="key" placeholder="搜索音乐" autocomplete="off">
             </form>
-            <a href="" class="set_cookie">设置cookie</a>
-            <form class="cookie_form">
-                <input type="text" placeholder="输入你的cookie">
-                <input type="button" value=设置>
+            <span    class="set_cookie">设置cookie</span>
+            <form class="cookie_form" >
+                <input type="text" name="cookie" placeholder="登录y.qq.com后 在控制台输入 document.cookie，将打印的字符串粘贴进来" autocomplete="off">
+                <input type="submit" value=设置>
             </form>
         </nav>
     </header>
@@ -52,12 +52,12 @@
 <!--播放器-->
 <div id="player" class="hidden">
 </div>
-
 <footer class="footer">
     <span> 2020 <a href="https://dreamsakula.top/">Grit</a></span>
     <br>
     musicApi Powered by <a href="https://github.com/jsososo">jsososo</a>
 </footer>
 <script src="./JavaScript/app.js"></script>
+
 </body>
 </html>

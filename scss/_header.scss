@@ -11,7 +11,7 @@
 }
   nav{
     position:relative;
-    z-index:2;
+    z-index:999;
     width:100%;
     height:$nav-height;
     background-color:  $nav-bg-color;
@@ -63,6 +63,7 @@
       }
     }
     .set_cookie{
+      cursor: pointer;
       color:$nav-bg-color;
       height:38px;
       width: 122px;
@@ -72,25 +73,21 @@
       background-color: $nav-hover-color;
       border-color: $nav-hover-color;
       font-size:13px;
-      &:hover+.cookie_form{
-        visibility: visible;
+      &:hover{
+        background-color: #67C23A;
       }
     }
     .cookie_form{
-      &:hover{
-        visibility: visible;
-      }
-      visibility: hidden;
       position:absolute;
-      top: $nav-height - 20px;
+      top: $nav-height - 25px;
       right: 0;
       display: flex;
       flex-direction:column;
       input{
-        border-radius:0px;
         border:1px solid $input-border-color;
+        width: 500px;
       }
-      input[type=button]{
+      input[type=submit]{
         background-color: $nav-bg-color;
         color: $root-fontSize;
         border-top:none;

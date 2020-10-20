@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
 
 nav {
   position: relative;
-  z-index: 2;
+  z-index: 999;
   width: 100%;
   height: 90px;
   background-color: #fff;
@@ -66,7 +66,7 @@ nav ul {
   margin: auto 20px;
 }
 nav ul .active {
-  background-color: #73ac00;
+  background-color: #70ac00;
 }
 nav ul .active a {
   color: #fff;
@@ -86,7 +86,7 @@ nav ul li a {
   line-height: 90px;
 }
 nav ul li a:hover {
-  color: #73ac00;
+  color: #70ac00;
 }
 nav input {
   height: 36px;
@@ -101,45 +101,45 @@ nav input:-ms-input-placeholder {
   font-size: 14px;
 }
 nav .set_cookie {
+  cursor: pointer;
   color: #fff;
   height: 38px;
   width: 122px;
   text-align: center;
   border-radius: 3px;
   line-height: 38px;
-  background-color: #73ac00;
-  border-color: #73ac00;
+  background-color: #70ac00;
+  border-color: #70ac00;
   font-size: 13px;
 }
-nav .set_cookie:hover + .cookie_form {
-  visibility: visible;
+nav .set_cookie:hover {
+  background-color: #67C23A;
 }
 nav .cookie_form {
-  visibility: hidden;
   position: absolute;
-  top: 70px;
+  top: 65px;
   right: 0;
   display: flex;
   flex-direction: column;
 }
-nav .cookie_form:hover {
-  visibility: visible;
-}
 nav .cookie_form input {
-  border-radius: 0px;
   border: 1px solid #c9c9c9;
+  width: 500px;
 }
-nav .cookie_form input[type=button] {
+nav .cookie_form input[type=submit] {
   background-color: #fff;
   color: 16px;
   border-top: none;
   cursor: pointer;
 }
-nav .cookie_form input[type=button]:hover {
+nav .cookie_form input[type=submit]:hover {
   color: #fff;
-  background-color: #73ac00;
+  background-color: #70ac00;
 }
 
+.main {
+  min-height: 100vh;
+}
 .main .slider {
   position: relative;
   overflow: hidden;
@@ -201,7 +201,7 @@ nav .cookie_form input[type=button]:hover {
 }
 .new_song_recommend .new_song_leave ul li a:hover {
   cursor: pointer;
-  color: #73ac00;
+  color: #70ac00;
 }
 .new_song_recommend .new_song_leave .song_list {
   margin: 20px 0;
@@ -255,14 +255,14 @@ nav .cookie_form input[type=button]:hover {
   overflow: hidden;
 }
 .new_song_recommend .new_song_leave .song_list .song_list_ul .song_list_li a dl .song_name:hover {
-  color: #73ac00;
+  color: #70ac00;
 }
 .new_song_recommend .new_song_leave .song_list .song_list_ul .song_list_li a dl .singer {
   color: #999999;
   transition: all 0.1s linear;
 }
 .new_song_recommend .new_song_leave .song_list .song_list_ul .song_list_li a dl .singer:hover {
-  color: #73ac00;
+  color: #70ac00;
 }
 
 .footer {
@@ -271,13 +271,12 @@ nav .cookie_form input[type=button]:hover {
   background-color: #262626;
   height: 90px;
   width: 100%;
-  bottom: -100px;
   text-align: center;
   color: #fff;
   padding-top: 30px;
 }
 .footer a {
-  color: #73ac00;
+  color: #70ac00;
 }
 .footer a:hover {
   color: #ff4848;
@@ -331,7 +330,7 @@ nav .cookie_form input[type=button]:hover {
   cursor: pointer;
 }
 #player .prograss_min:hover {
-  background-color: #73ac00;
+  background-color: #70ac00;
 }
 #player img {
   margin-right: 20px;
@@ -374,91 +373,99 @@ nav .cookie_form input[type=button]:hover {
 #player .prograss_container .prograss_group .prograss_bar .prograss_blue {
   height: 100%;
   width: 100%;
-  background-color: #73ac00;
+  background-color: #70ac00;
   transform: translateX(-100%);
 }
 
 .day_rec {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
 }
-.day_rec .day_top {
+.day_rec .ablum_song {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+}
+.day_rec .ablum_song .day_top {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: flex-end;
 }
-.day_rec .day_top .day_top_text {
-  margin-left: 100px;
-  margin-top: 30px;
+.day_rec .ablum_song .day_top img {
+  border-radius: 3px;
+  margin: 20px;
+  height: 200px;
 }
-.day_rec .day_top p:first-child {
+.day_rec .ablum_song .day_top .day_top_text {
+  margin: 20px;
+}
+.day_rec .ablum_song .day_top p:first-child {
   font-size: 2rem;
 }
-.day_rec .day_top p:nth-child(2) {
-  color: #ff4848;
+.day_rec .ablum_song .day_top p:nth-child(2) {
+  color: #E6A23C;
   font-weight: 300;
   font-size: 0.8rem;
   margin: 10px 0;
 }
-.day_rec .day_bottom {
+.day_rec .ablum_song .day_bottom {
   margin: 20px 0;
   font-size: 18px;
 }
-.day_rec .day_bottom p {
+.day_rec .ablum_song .day_bottom p {
   margin: 10px 0;
   font-size: 1.5rem;
 }
-.day_rec .day_bottom ul {
+.day_rec .ablum_song .day_bottom ul {
   display: inline-block;
   width: 100%;
-  border: 1px solid #c9c9c9;
   border-radius: 3px;
 }
-.day_rec .day_bottom ul li {
+.day_rec .ablum_song .day_bottom ul li {
   height: 70px;
 }
-.day_rec .day_bottom ul li a {
+.day_rec .ablum_song .day_bottom ul li a {
+  color: #262626;
   font-size: 1rem;
   cursor: default;
   line-height: 70px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
-.day_rec .day_bottom ul li a:hover {
-  color: #73ac00;
+.day_rec .ablum_song .day_bottom ul li a:hover {
+  color: #70ac00;
 }
-.day_rec .day_bottom ul li a span {
+.day_rec .ablum_song .day_bottom ul li a span {
+  font-weight: 300;
+}
+.day_rec .ablum_song .day_bottom ul li a span:nth-child(1) {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 300;
-  display: inline-block;
+  display: inline;
+  max-width: 500px;
+  width: 500px;
+  margin-left: 30px;
 }
-.day_rec .day_bottom ul li a span:nth-child(1) {
-  min-width: 600px;
-  width: 600px;
-  overflow: hidden;
-  margin-left: 20px;
-}
-.day_rec .day_bottom ul li a span:nth-child(2) {
+.day_rec .ablum_song .day_bottom ul li a span:nth-child(2) {
   color: #999999;
 }
-.day_rec .day_bottom ul li a span:nth-child(3) {
+.day_rec .ablum_song .day_bottom ul li a span:nth-child(3) {
   color: #999999;
   margin-right: 50px;
 }
-.day_rec .day_bottom ul li:nth-child(2n) {
+.day_rec .ablum_song .day_bottom ul li:nth-child(2n) {
   background-color: #f9f9f9;
 }
-.day_rec .day_bottom ul li:nth-child(2n+1) {
+.day_rec .ablum_song .day_bottom ul li:nth-child(2n+1) {
   background-color: #f5f5f5;
 }
 
 .rank {
-  overflow: hidden;
+  position: absolute;
   left: 0;
+  overflow: hidden;
+  width: 100vw;
   z-index: 11;
   color: #000;
 }
@@ -500,7 +507,7 @@ nav .cookie_form input[type=button]:hover {
   background-size: auto 150%;
   background-position: 0;
   background-repeat: no-repeat;
-  background-color: rgba(255, 72, 72, 0.2);
+  background-color: rgba(230, 162, 60, 0.2);
   flex-grow: 1;
   flex-basis: 1px;
 }
@@ -511,7 +518,7 @@ nav .cookie_form input[type=button]:hover {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(253, 215, 214, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
   transition: all 0.7s ease 0.1s;
 }
 .rank .rank_ul_1 .rank_li_1:hover {
@@ -610,7 +617,7 @@ nav .cookie_form input[type=button]:hover {
   font-size: 2rem;
 }
 .rank .ablum_song .day_top p:nth-child(2) {
-  color: #ff4848;
+  color: #E6A23C;
   font-weight: 300;
   font-size: 0.8rem;
   margin: 10px 0;
@@ -640,7 +647,7 @@ nav .cookie_form input[type=button]:hover {
   justify-content: space-between;
 }
 .rank .ablum_song .day_bottom ul li a:hover {
-  color: #73ac00;
+  color: #70ac00;
 }
 .rank .ablum_song .day_bottom ul li a span {
   font-weight: 300;
@@ -683,7 +690,7 @@ nav .cookie_form input[type=button]:hover {
   font-size: 2rem;
 }
 .search .search_top_text p:nth-child(2) {
-  color: #ff4848;
+  color: #E6A23C;
   font-weight: 300;
   font-size: 0.8rem;
   margin: 10px 0;
@@ -699,22 +706,21 @@ nav .cookie_form input[type=button]:hover {
 .search .day_bottom ul {
   display: inline-block;
   width: 100%;
-  border: 1px solid #c9c9c9;
   border-radius: 3px;
 }
 .search .day_bottom ul li {
   height: 70px;
 }
 .search .day_bottom ul li a {
+  color: #262626;
   font-size: 1rem;
   cursor: default;
   line-height: 70px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 .search .day_bottom ul li a:hover {
-  color: #73ac00;
+  color: #70ac00;
 }
 .search .day_bottom ul li a span {
   font-weight: 300;
@@ -729,7 +735,6 @@ nav .cookie_form input[type=button]:hover {
   margin-left: 30px;
 }
 .search .day_bottom ul li a span:nth-child(2) {
-  width: 100px;
   color: #999999;
 }
 .search .day_bottom ul li a span:nth-child(3) {
@@ -784,14 +789,14 @@ nav .cookie_form input[type=button]:hover {
   cursor: pointer;
 }
 .my_music .mymusic_header .avatar ~ ul .active {
-  background-color: #73ac00;
+  background-color: #70ac00;
   color: #fff;
 }
 .my_music .mymusic_header .avatar ~ ul li {
   padding: 5px 20px;
 }
 .my_music .mymusic_header .avatar ~ ul li:hover {
-  background-color: #73ac00;
+  background-color: #70ac00;
   color: #fff;
 }
 .my_music .my_music_songlist {
@@ -804,7 +809,6 @@ nav .cookie_form input[type=button]:hover {
 .my_music .my_music_songlist .diss_list ul li {
   height: 150px;
   width: 150px;
-  background-color: #ff4848;
   margin: 50px 25px;
 }
 .my_music .my_music_songlist .diss_list ul li img {
@@ -844,7 +848,7 @@ nav .cookie_form input[type=button]:hover {
   font-size: 2rem;
 }
 .my_music .ablum_song .day_top p:nth-child(2) {
-  color: #ff4848;
+  color: #E6A23C;
   font-weight: 300;
   font-size: 0.8rem;
   margin: 10px 0;
@@ -874,7 +878,7 @@ nav .cookie_form input[type=button]:hover {
   justify-content: space-between;
 }
 .my_music .ablum_song .day_bottom ul li a:hover {
-  color: #73ac00;
+  color: #70ac00;
 }
 .my_music .ablum_song .day_bottom ul li a span {
   font-weight: 300;
@@ -907,6 +911,7 @@ nav .cookie_form input[type=button]:hover {
   min-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden;
 }
 
 .clearfix:after {
@@ -916,18 +921,18 @@ nav .cookie_form input[type=button]:hover {
 }
 
 .active a {
-  color: #73ac00;
+  color: #70ac00;
 }
 
-#load_ico {
+.load_ico {
   width: 100%;
 }
-#load_ico .loading {
+.load_ico .loading {
   width: 100%;
   font-size: 50px;
   margin: 20px auto;
 }
-#load_ico .load_rotate {
+.load_ico .load_rotate {
   animation: loading 1s cubic-bezier(0.68, 0.33, 0.68, 0.51) infinite;
 }
 @keyframes loading {
@@ -941,8 +946,23 @@ nav .cookie_form input[type=button]:hover {
 
 .song_isvip {
   display: inline;
-  color: #ff4848 !important;
+  color: #E6A23C !important;
   margin-left: 10px;
+}
+
+.tip {
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 51;
+  border-radius: 2px;
+  text-align: center;
+  background-color: #E6A23C;
+  color: #fff;
+  padding: 15px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  max-width: 400px;
 }
 
 /*# sourceMappingURL=app.css.map */

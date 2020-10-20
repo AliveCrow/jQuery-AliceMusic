@@ -38,12 +38,13 @@ export class SongSlider {
 	//判断地区
 	decideArea() {
 		this.load = new Load('.song_list_ul',true)
+		this.load.template()
 		let area = 0
 		this.render(area)
 		let _this = this
 		let prev =0
 		$(`${this.tab}>li`).click(function(e) {
-			_this.load.render()
+			_this.load.template()
 			area = $(this)
 				.index()
 			if(prev === area){

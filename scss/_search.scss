@@ -30,23 +30,21 @@
     ul{
       display: inline-block;
       width: 100%;
-      border:1px solid $input-border-color;
       border-radius:3px;
       li{
         height:70px;
         a{
+          color: #262626;
           font-size: 1rem;
           cursor: default;
           line-height:70px;
           display:flex;
           justify-content:space-between;
-          align-items:center;
           &:hover{
             color: $nav-hover-color;
           }
           span{
             font-weight:300;
-            //border: 1px solid red;
             &:nth-child(1){
               overflow: hidden;
               text-overflow:ellipsis;
@@ -57,7 +55,6 @@
               margin-left:30px;
             }
             &:nth-child(2){
-              width: 100px;
               color:$song_list_font-size;
             }
             &:nth-child(3){
@@ -65,7 +62,6 @@
               margin-right: 50px;
 
             }
-            //display: inline-block;
           }
         }
         &:nth-child(2n){

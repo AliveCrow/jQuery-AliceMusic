@@ -5,9 +5,9 @@ export class Load{
 	constructor(slot,replace=false) {
 		this.slot= $(`${slot}` )
 		this.instead = replace
-		this.dom = this.template()
+		this.dom
 	}
-	template(){
+	template(el){
 		let html=`
     <svg t="1603018131108" class="icon loading load_rotate"  viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
          p-id="3289" >
@@ -16,23 +16,32 @@ export class Load{
     </svg>
 		`
 		let dom = document.createElement('div')
-		dom.id = 'load_ico'
+		dom.className = 'load_ico'
 		$(dom).append(html)
-
-		$(dom).appendTo(this.slot)
-		return $(dom)
-	}
-
-	render(el){
-		if(this.instead===true){
-			$(el||this.slot).children().remove()
-			$(el||this.slot).append(this.dom)
+		if(this.instead===true) {
+			$ (el || this.slot)
+				.children ()
+				.hide ()
+			$ (el || this.slot)
+				.append ($(dom))
+		}else{
+			$ (el || this.slot)
+				.append ($(dom))
 		}
-		$('#load_ico').fadeIn()
+		this.dom = $(dom)
 	}
 
-	remove(){
-		$('#load_ico').hide()
+	render(){
+		this.dom.fadeIn()
+	}
+
+	remove(el){
+		if(this.instead===true){
+			$ (el || this.slot)
+				.children ()
+				.fadeIn ()
+		}
+		this.dom.remove()
 	}
 
 

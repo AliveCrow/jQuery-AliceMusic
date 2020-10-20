@@ -3,7 +3,6 @@
 .my_music{
   width: 1200px;
   margin: 0 auto;
-
   .mymusic_header{
     display: flex;
     flex-direction: column;
@@ -63,7 +62,6 @@
         li{
           height: 150px;
           width: 150px;
-          background-color: #ff4848;
           margin: 50px 25px;
           img{
             height: 100%;
@@ -169,7 +167,4 @@
       }
     }
   }
-
-
-
 }
