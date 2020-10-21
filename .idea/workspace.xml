@@ -20,8 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac4160d5-c940-4451-a8ee-c72c9b416912" name="默认更改列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.cache/18/d6460c27340e770f41307f46d255bc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/18/d6460c27340e770f41307f46d255bc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.cache/31/7a48717337ba0f2259fd2a5f9da769.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/31/7a48717337ba0f2259fd2a5f9da769.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.af6b06b1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.af6b06b1.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.af6b06b1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.af6b06b1.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.b0268aaa.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.b0268aaa.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/logo.de01bb0e.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,12 +61,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last.edited.regexp" value="Sample Text&#10;" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -92,7 +105,7 @@
       <workItem from="1602915888108" duration="22752000" />
       <workItem from="1603007058753" duration="58957000" />
       <workItem from="1603168636408" duration="46869000" />
-      <workItem from="1603256865422" duration="33460000" />
+      <workItem from="1603256865422" duration="33959000" />
     </task>
     <servers />
   </component>
