@@ -1,15 +1,21 @@
 import $ from './jquery-3.5.1.min'
 import {Prograss} from './prograss';
 import {BtnState} from './BtnState';
+import  {Lyric} from "./lyric/app";
+
+import {lyric} from  './app'
+
 
 export class Player {
 	constructor(musicData) {
 		this.musicData = musicData
-		this.btn = new BtnState ('#player')
+		this.btn = new BtnState ('.player_left')
 		this.$audio
 		this.duration
 		this.prograss;
 		this.prev
+		this.Lyric
+
 	}
 
 	playerInit() {
@@ -37,11 +43,9 @@ export class Player {
 
 	show() {
 		$ ('#player')
-			.slideDown ()
+			.slideDown()
 	}
 
-//  http://qiniu.dreamsakula.top/C4000000NpyS0N53eQ.mp4
-// 	${this.musicData.PlayerUrl}
 	createAudio(volume) {
 		this.show ()
 		this.render (volume)
@@ -52,12 +56,13 @@ export class Player {
 			audio.id = `Player-${new Date ().getTime ()}`
 			audio.src = `${this.musicData.PlayerUrl}`;
 			audio.autoplay = true
-			audio.loop = true
+			// audio.loop = true
 			audio.volume = volume
-
 			$ (audio)
 				.on ('ended', () => {
+					this.$audio.play()
 					this.prograss.restart ()
+					lyric.restart()
 				})
 			document.body.appendChild (audio)
 			this.$audio = document.querySelector ('audio')
@@ -65,7 +70,6 @@ export class Player {
 			$ (this.$audio)
 				.on ('canplay', () => {
 					this.prograss = new Prograss (audio.duration)
-					// this.prograss.reset(this.duration)
 					this.duration = audio.duration
 					this.playerInit ()
 				})
@@ -73,15 +77,18 @@ export class Player {
 			this.newPlay ()
 		}
 
-
 		return audio
 	}
 
 	render(volume) {
 		let _this = this
+		console.log (_this)
 		let text = `
  <!--播放器-->
-    <img src="${this.musicData.PicUrl}" alt="" height="100px">
+ 	<div class="player_left">
+ 	    <img src="${this.musicData.PicUrl}" alt="" height="100px">
+		
+	</div>
 <!--    右半部分-->
     <div class="player_right">
     	<div class="player_right_top">
@@ -92,10 +99,16 @@ export class Player {
 			</svg>
 			<input type="range" class="volume_range" min="0" max="1" step="0.01" value="${volume}" >
 			</div>
-			<svg t="1603207544491" class="icon expansion" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6545" width="200" height="200">
-				<path d="M448 554.666667c-6.4 0-10.666667 2.133333-14.933333 6.4L85.333333 908.8 85.333333 661.333333c0-12.8-8.533333-21.333333-21.333333-21.333333s-21.333333 8.533333-21.333333 21.333333l0 298.666667c0 12.8 8.533333 21.333333 21.333333 21.333333l298.666667 0c12.8 0 21.333333-8.533333 21.333333-21.333333 0-12.8-8.533333-21.333333-21.333333-21.333333L115.2 938.666667l347.733333-347.733333c4.266667-4.266667 6.4-8.533333 6.4-14.933333C469.333333 563.2 460.8 554.666667 448 554.666667zM960 42.666667 661.333333 42.666667c-12.8 0-21.333333 8.533333-21.333333 21.333333 0 12.8 8.533333 21.333333 21.333333 21.333333l247.466667 0L561.066667 433.066667C556.8 437.333333 554.666667 441.6 554.666667 448c0 12.8 8.533333 21.333333 21.333333 21.333333 6.4 0 10.666667-2.133333 14.933333-6.4L938.666667 115.2 938.666667 362.666667c0 12.8 8.533333 21.333333 21.333333 21.333333s21.333333-8.533333 21.333333-21.333333L981.333333 64C981.333333 51.2 972.8 42.666667 960 42.666667z" p-id="6546" >
+			<div class="ico_group">
+				<svg t="1603207544491" class="icon expansion" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6545" width="200" height="200">
+					<path d="M448 554.666667c-6.4 0-10.666667 2.133333-14.933333 6.4L85.333333 908.8 85.333333 661.333333c0-12.8-8.533333-21.333333-21.333333-21.333333s-21.333333 8.533333-21.333333 21.333333l0 298.666667c0 12.8 8.533333 21.333333 21.333333 21.333333l298.666667 0c12.8 0 21.333333-8.533333 21.333333-21.333333 0-12.8-8.533333-21.333333-21.333333-21.333333L115.2 938.666667l347.733333-347.733333c4.266667-4.266667 6.4-8.533333 6.4-14.933333C469.333333 563.2 460.8 554.666667 448 554.666667zM960 42.666667 661.333333 42.666667c-12.8 0-21.333333 8.533333-21.333333 21.333333 0 12.8 8.533333 21.333333 21.333333 21.333333l247.466667 0L561.066667 433.066667C556.8 437.333333 554.666667 441.6 554.666667 448c0 12.8 8.533333 21.333333 21.333333 21.333333 6.4 0 10.666667-2.133333 14.933333-6.4L938.666667 115.2 938.666667 362.666667c0 12.8 8.533333 21.333333 21.333333 21.333333s21.333333-8.533333 21.333333-21.333333L981.333333 64C981.333333 51.2 972.8 42.666667 960 42.666667z" p-id="6546" >
 				</path>
-			</svg>
+				</svg>
+				<svg t="1603259694775" class="icon withdraw" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4813" width="200" height="200">
+					<path d="M448 554.666667 149.333333 554.666667c-12.8 0-21.333333 8.533333-21.333333 21.333333 0 12.8 8.533333 21.333333 21.333333 21.333333l247.466667 0L49.066667 945.066667C44.8 949.333333 42.666667 953.6 42.666667 960c0 12.8 8.533333 21.333333 21.333333 21.333333 6.4 0 10.666667-2.133333 14.933333-6.4L426.666667 627.2 426.666667 874.666667c0 12.8 8.533333 21.333333 21.333333 21.333333s21.333333-8.533333 21.333333-21.333333L469.333333 576C469.333333 563.2 460.8 554.666667 448 554.666667zM981.333333 64c0-12.8-8.533333-21.333333-21.333333-21.333333-6.4 0-10.666667 2.133333-14.933333 6.4L597.333333 396.8 597.333333 149.333333c0-12.8-8.533333-21.333333-21.333333-21.333333s-21.333333 8.533333-21.333333 21.333333l0 298.666667c0 12.8 8.533333 21.333333 21.333333 21.333333l298.666667 0c12.8 0 21.333333-8.533333 21.333333-21.333333s-8.533333-21.333333-21.333333-21.333333L627.2 426.666667 974.933333 78.933333C979.2 74.666667 981.333333 70.4 981.333333 64z" p-id="4814" class="volume_line"></path>
+				</svg>
+			</div>
+
 		</div>
 <!--        进度条-->
         <div class="prograss_container">
@@ -110,9 +123,8 @@ export class Player {
         </div>
     </div>
 		`
-		$ ('#player')
+		$ ('.player_prograss')
 			.html (text)
-
 		this.prev = volume
 		$('.volume_range').css('background-size',`${Math.floor(volume*100)}%`).mouseenter(function (e){
 			$(this).mousedown((e)=>{
@@ -140,19 +152,35 @@ export class Player {
 		})
 
 		$('.music_progress').mouseenter(function (e){
+
 			let width = $(this).width()
 			let ofx = e.offsetX<=0?0:(e.offsetX>=width?100:e.offsetX)
 			let currentPosition = ofx/$(this).width()
 			$(this).mousedown((e)=>{
+
+				lyric.toScroll(_this.$audio .duration * currentPosition)
 				_this.prograss.currentTime = _this.$audio .duration * currentPosition
 				_this.$audio.currentTime = _this.$audio .duration * currentPosition
 			})
+			$(document).unbind('mousedown');
 
 		})
+
+		$('.expansion').click(function (e){
+			$('#player_all').css('transform','translateY(0%)')
+			$(this).css('display','none').siblings().css('display','block')
+		})
+
+		$('.withdraw').click(function (e){
+			$('#player_all').css('transform','translateY(95%)')
+			$(this).css('display','none').siblings().css('display','block')
+		})
+
 	}
 
 
 	pause() {
+		lyric.stopScroll()
 		this.prograss.stop ()
 		this.$audio
 			.pause ()
@@ -160,6 +188,7 @@ export class Player {
 
 	onPlay() {
 		this.prograss.start()
+		lyric.startScroll()
 		this.$audio
 			.play ()
 	}
@@ -170,10 +199,12 @@ export class Player {
 		audio.id = `Player-${new Date ().getTime ()}`
 		audio.src = `${this.musicData.PlayerUrl}`;
 		audio.autoplay = true
-		audio.loop = true
+		// audio.loop = true
 		$ (audio)
 			.on ('ended', () => {
+				this.$audio.play()
 				this.prograss.restart ()
+				lyric.restart()
 			})
 		document.body.appendChild (audio)
 		this.$audio = document.querySelector ('audio')

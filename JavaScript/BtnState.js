@@ -14,6 +14,7 @@ export class BtnState{
 	}
 
 	render(){
+		$('.change_state_btn').remove()
 		$(this.el).append(this.html)
 		$('.play').css('display','none')
 		$('.pause').css('display','block')

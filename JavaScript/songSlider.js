@@ -1,6 +1,7 @@
 import $ from './jquery-3.5.1.min'
 import {GetMusicData} from './getMusicData';
 import {Load} from './load/app'
+import {Lyric} from "./lyric/app";
 
 
 export class SongSlider {
@@ -12,6 +13,7 @@ export class SongSlider {
 		this.songmid
 		this.song
 		this.showlist = {}
+		this.Lyric = new Lyric()
 	}
 	template(picUrl, songUrl, item) {
 		let text = `
@@ -81,8 +83,8 @@ export class SongSlider {
 						.appendTo($(this.container))
 				})
 				let on =  this.throttle(function (e){
-							let song = new GetMusicData (_this.songmid)
-							song.getData (_this.songmid)
+							let song = new GetMusicData ()
+							song.getData (_this.songmid,null ,_this.Lyric)
 				},1500)
 				$ (`.song_mid`).on ('click', (e)=>{
 					this.songmid = e.currentTarget.dataset.songmid

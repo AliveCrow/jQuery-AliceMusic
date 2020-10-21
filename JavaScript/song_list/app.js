@@ -1,6 +1,7 @@
 import $ from '../jquery-3.5.1.min'
 import {Load} from '../load/app'
 import {GetMusicData} from "../getMusicData";
+import {Lyric} from "../lyric/app";
 
 export class SongList {
 	constructor(slot,data,showPic=true) {

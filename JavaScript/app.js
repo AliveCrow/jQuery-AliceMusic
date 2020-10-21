@@ -4,9 +4,11 @@ import {Tab} from './tab'
 import  {Search} from './search/app'
 import {Tip} from "./tip/app";
 import  {SetCookie} from "./setCookie/app";
+import {Lyric} from "./lyric/app";
 
 $('.cookie_form').hide()
 let tip = new Tip()
+
 
 $(function () {
 	$.ajax({
@@ -37,5 +39,6 @@ $(function () {
 	})
 })
 
+export const lyric= new Lyric()
 
 

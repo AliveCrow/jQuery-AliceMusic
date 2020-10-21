@@ -2,7 +2,8 @@ import $ from './jquery-3.5.1.min'
 
 import {Player} from './player'
 import {Tip} from "./tip/app";
-import {Load} from "./load/app";
+import {lyric} from  './app'
+
 
 export class GetMusicData {
 	constructor() {
@@ -15,6 +16,7 @@ export class GetMusicData {
 		this.volume= 0
 		this.pay_play = false
 		this.loadover = false
+
 	}
 
 	getData(songmid,load,el) {
@@ -29,7 +31,7 @@ export class GetMusicData {
 				this.songName = res.data.track_info.name
 				this.singerName = res.data.track_info.singer[0].name
 				this.volume = res.data.track_info.volume.peak
-				this.musicPlayUrl(songmid)
+				this.musicPlayUrl(songmid,el)
 				if(load){
 					load.remove(el)
 				}
@@ -52,6 +54,8 @@ export class GetMusicData {
 				this.PlayerUrl = res.data
 				let player = new Player(this)
 				player.createAudio(this.volume)
+				lyric.template()
+				lyric.getLyric(songmid)
 				$('.load_ico').hide()
 			}
 		})
