@@ -23,16 +23,6 @@
       <change beforePath="$PROJECT_DIR$/.cache/18/d6460c27340e770f41307f46d255bc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/18/d6460c27340e770f41307f46d255bc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.cache/31/7a48717337ba0f2259fd2a5f9da769.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/31/7a48717337ba0f2259fd2a5f9da769.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/app.af6b06b1.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/app.af6b06b1.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/app.af6b06b1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/app.af6b06b1.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/app.b0268aaa.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/app.b0268aaa.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/logo.de01bb0e.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +95,7 @@
       <workItem from="1602915888108" duration="22752000" />
       <workItem from="1603007058753" duration="58957000" />
       <workItem from="1603168636408" duration="46869000" />
-      <workItem from="1603256865422" duration="33959000" />
+      <workItem from="1603256865422" duration="34181000" />
     </task>
     <servers />
   </component>
