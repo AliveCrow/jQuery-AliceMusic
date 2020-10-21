@@ -1,15 +1,14 @@
 
 import {Lyric,Load,GetMusicData} from "../component/app";
-// import {GetMusicData} from '../commonFunc/getMusicData';
 
 export class SongSlider {
 	constructor(tab, container) {
 		this.container = container
 		this.tab = tab
 		this.area = $(`${this.tab}>li`)
-		this.player
-		this.songmid
-		this.song
+		this.player = null
+		this.songmid = null
+		this.song = null
 		this.showlist = {}
 		this.Lyric = new Lyric()
 	}
@@ -70,7 +69,6 @@ export class SongSlider {
 				if(res.result ===100){
 					this.load.remove()
 				}
-
 				$(this.container)
 					.html('')
 				this.showlist = res.data.list.splice(0, 10)
