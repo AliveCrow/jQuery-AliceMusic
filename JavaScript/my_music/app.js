@@ -1,16 +1,13 @@
-import $ from '../jquery-3.5.1.min'
-import {SongList} from "../song_list/app";
-import {Load} from "../load/app";
-import {Tip} from "../tip/app";
+import {Load,Tip,SongList} from "../component/app";
 
 export class Mymusic{
 	constructor(header,body) {
 		this.header = header
 		this.body = body
 		this.qq =''
-		this.headerload= new Load (this.header , true)
+		this.headerload= new Load(this.header , true)
 		this.headerload.template()
-		this.bodyload = new Load ('.my_music_songlist' , false)
+		this.bodyload = new Load('.my_music_songlist' , false)
 		this.bodyload.template()
 		this.data={
 			'nickname':'',

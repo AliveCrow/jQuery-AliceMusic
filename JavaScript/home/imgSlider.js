@@ -1,4 +1,3 @@
-import $ from './jquery-3.5.1.min'
 
 
 export class ImgSlider {
@@ -6,7 +5,7 @@ export class ImgSlider {
 		this.container = container
 		this.selector = selector
 		this.index = 0
-		this.intervalId;
+		this.intervalId=null
 	}
 
 	sliderInit() {

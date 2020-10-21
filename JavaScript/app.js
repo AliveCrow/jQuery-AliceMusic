@@ -1,14 +1,10 @@
-import $ from './jquery-3.5.1.min'
 
-import {Tab} from './tab'
-import  {Search} from './search/app'
-import {Tip} from "./tip/app";
-import  {SetCookie} from "./setCookie/app";
-import {Lyric} from "./lyric/app";
+import {Tab} from './nav/tab'
+import {Search} from './nav/search'
+import {SetCookie} from './nav/setCookie'
+import {tip} from './component/app'
 
 $('.cookie_form').hide()
-let tip = new Tip()
-
 
 $(function () {
 	$.ajax({
@@ -34,11 +30,10 @@ $(function () {
 			tab.getCookie()
 			let search = new Search('.main')
 			search.init()
-
 		}
 	})
 })
 
-export const lyric= new Lyric()
+
 
 

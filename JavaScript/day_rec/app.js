@@ -1,12 +1,10 @@
-import $ from '../jquery-3.5.1.min'
-import  {SongList} from "../song_list/app";
-import {Load} from "../load/app";
+import {Load,SongList} from "../component/app";
 
 
 export class DayRec{
 	constructor(el) {
 		this.el =el
-		this.load= new Load (this.el , true)
+		this.load= new Load(this.el , true)
 		this.load.template()
 	}
 

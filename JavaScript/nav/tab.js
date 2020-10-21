@@ -1,10 +1,9 @@
-import $ from './jquery-3.5.1.min'
-import {ImgSlider} from "./imgSlider";
-import {SongSlider} from "./songSlider";
-import {RenderRank} from "./rank/app";
-import {Mymusic} from './my_music/app'
-import {DayRec} from "./day_rec/app"
-import {Tip} from "./tip/app";;
+import {ImgSlider} from "../home/imgSlider";
+import {SongSlider} from "../home/songSlider";
+import {RenderRank} from "../rank/app";
+import {Mymusic} from '../my_music/app'
+import {DayRec} from "../day_rec/app"
+import {tip} from "../component/app";
 
 export class Tab {
 	constructor(selector) {
@@ -17,7 +16,7 @@ export class Tab {
 		this.root = $ (`.home`)
 		this.slider = new ImgSlider ('.slider_ul', '.slider_ul li')
 		this.songSlider = new SongSlider ('.song_area_ul', '.song_list_ul')
-		this.Tip = new Tip()
+		this.Tip = tip
 		this.uin
 		this.qm_keyst
 		this.getCookie()

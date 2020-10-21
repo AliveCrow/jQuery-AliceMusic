@@ -1,14 +1,14 @@
 
-import $ from '../jquery-3.5.1.min'
-import {Tip} from "../tip/app";
+import {tip} from '../component/app'
 
 export class SetCookie{
 	constructor() {
-		this.tip = new Tip()
+		this.tip = tip
 		this.init()
 	}
 
 	set(cookie){
+
 		let _this = this
 		var settings = {
 			"url": "http://localhost:3300/user/setCookie?=",
@@ -46,7 +46,6 @@ export class SetCookie{
 			_this.set(cookie)
 		})
 	}
-
 	deleteCookie(){
 		let _this = this
 		var settings = {
@@ -66,6 +65,4 @@ export class SetCookie{
 			},400)
 		});
 	}
-
-
 }

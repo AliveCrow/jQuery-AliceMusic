@@ -1,8 +1,6 @@
-import $ from './jquery-3.5.1.min'
-import {GetMusicData} from './getMusicData';
-import {Load} from './load/app'
-import {Lyric} from "./lyric/app";
 
+import {Lyric,Load,GetMusicData} from "../component/app";
+// import {GetMusicData} from '../commonFunc/getMusicData';
 
 export class SongSlider {
 	constructor(tab, container) {
@@ -36,7 +34,6 @@ export class SongSlider {
 
 		return liDom
 	}
-
 	//判断地区
 	decideArea() {
 		this.load = new Load('.song_list_ul',true)
@@ -83,7 +80,7 @@ export class SongSlider {
 						.appendTo($(this.container))
 				})
 				let on =  this.throttle(function (e){
-							let song = new GetMusicData ()
+							let song = new GetMusicData()
 							song.getData (_this.songmid,null ,_this.Lyric)
 				},1500)
 				$ (`.song_mid`).on ('click', (e)=>{

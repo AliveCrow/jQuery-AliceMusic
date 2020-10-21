@@ -1,7 +1,6 @@
-import $ from "../jquery-3.5.1.min";
-import {Load} from '../load/app'
-import  {GetMusicData} from "../getMusicData";
-import {SongList} from "../song_list/app";
+import {Load,SongList,GetMusicData} from "../component/app";
+// import {GetMusicData} from "../commonFunc/getMusicData";
+
 
 export class RenderRank {
 	constructor(slot) {//el要插入的元素
@@ -10,7 +9,7 @@ export class RenderRank {
 		this.amblumSongList = []
 		this.data = []
 		this.initTime = null
-		this.load= new Load (slot, true)
+		this.load= new Load(slot, true)
 		this.load.template()
 		this.SongList
 	}
@@ -84,7 +83,7 @@ export class RenderRank {
 			$('.rank_ul_1').css('display','none')
 			let  topid= e.target.dataset.topid
 			let imgurl = e.target.dataset.imgurl
-			 _this.load = new Load ('.rank', true)
+			 _this.load = new Load('.rank', true)
 			_this.load.template()
 			_this.getSongMid(topid,null,imgurl)
 		})
@@ -114,7 +113,7 @@ export class RenderRank {
 	}
 
 	play(songmid){
-		let song = new GetMusicData(songmid)
+		let song = new GetMusicData()
 		song.getData(songmid)
 	}
 

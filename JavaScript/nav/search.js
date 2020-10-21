@@ -1,7 +1,4 @@
-
-import $ from "../jquery-3.5.1.min.js"
-import {GetMusicData} from "../getMusicData";
-import {Load} from '../load/app'
+import {Load,GetMusicData} from "../component/app";
 
 export class Search {
 	constructor(slot) {
@@ -13,7 +10,7 @@ export class Search {
 		this.maxPage= 0
 		this.keyword =''
 		this.isonly = false
-		this.load
+		this.load = null;
 		this.over = `<p class="load_over" style="text-align: center;font-size:1rem">没有歌曲了</p>`
 	}
 
@@ -35,7 +32,7 @@ export class Search {
 		$('.main').append(dom)
 		$('.day_bottom').append(this.over)
 		$('.load_over').hide()
-		this.load = new Load('.day_bottom')
+		this.load =new Load('.day_bottom')
 		this.load.template()
 		this.load.render()
 	}
@@ -45,7 +42,6 @@ export class Search {
 			$('.main').children().remove()
 			let keyword = $ ('input[name=key]')
 				.val ()
-			// action="http://localhost:3300/search?t=0"
 			this.template()
 			this.getData(keyword,1)
 			this.pageNo = 1
@@ -61,7 +57,6 @@ export class Search {
 		return `${min}:${sec}`
 	}
 	getData(keyword,pageNo =1) {
-		let _this = this
 		$.ajax ({
 			method: 'GET',
 			url: 'http://localhost:3300' + `/search?t=0&key=${keyword}&pageSize=20&pageNo=${pageNo}`,
@@ -89,7 +84,7 @@ export class Search {
 					let load = new Load('',true)
 					load.template(this)
 					let songmid = e.currentTarget.dataset.singmid
-					let song = new GetMusicData(songmid)
+					let song = new GetMusicData()
 					song.getData(songmid,load,this)
 				})
 			}
@@ -115,7 +110,6 @@ export class Search {
 
 	//节流
 	throttle(func, wait) {
-		let _this = this
 		let prev, timer
 		return function fn() {
 			let curr = Date.now()
