@@ -1,13 +1,13 @@
-import {Load,Tip,SongList} from "../component/app";
+import {load, tip, songList} from "../component/app";
 
 export class Mymusic{
 	constructor(header,body) {
 		this.header = header
 		this.body = body
 		this.qq =''
-		this.headerload= new Load(this.header , true)
+		this.headerload= load(this.header , true)
 		this.headerload.template()
-		this.bodyload = new Load('.my_music_songlist' , false)
+		this.bodyload =load('.my_music_songlist' , false)
 		this.bodyload.template()
 		this.data={
 			'nickname':'',
@@ -19,7 +19,7 @@ export class Mymusic{
 			'dissid':0,
 			'list':''
 		}
-		this.Tip = new Tip()
+		this.Tip = tip
 		this.getCookie()
 
 	}
@@ -45,7 +45,7 @@ export class Mymusic{
 			this.headerload.remove()
 		}
 		renderMymusic(){
-			this.SongList = new SongList(this.body,this.data,false)
+			this.SongList = songList(this.body,this.data,false)
 			this.SongList.template(this.data.headpic)
 		}
 		renderDiss(){
@@ -84,7 +84,6 @@ export class Mymusic{
 				url:`http://localhost:3300/user/cookie`,
 				success:res=>{
 					this.qq = res.data.userCookie.uin
-					// console.log (this.qq)
 					if(!this.qq){
 						this.Tip.template('还没有设置cookie(⊙o⊙)…','waring')
 
@@ -130,8 +129,8 @@ export class Mymusic{
 				url:`http://localhost:3300/songlist?id=${dissid}`,
 				success:res=>{
 					$('.my_music').children().remove()
-					let songList = new SongList('.my_music',res.data,true)
-					songList.template(res.data.logo)
+					let ablist = songList('.my_music',res.data,true)
+					ablist.template(res.data.logo)
 				}
 			})
 		}

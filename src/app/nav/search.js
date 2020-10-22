@@ -1,4 +1,4 @@
-import {Load,GetMusicData} from "../component/app";
+import {load, getMusicData, commonData} from "../component/app";
 
 export class Search {
 	constructor(slot) {
@@ -32,7 +32,8 @@ export class Search {
 		$('.main').append(dom)
 		$('.day_bottom').append(this.over)
 		$('.load_over').hide()
-		this.load =new Load('.day_bottom')
+		this.load = load('.day_bottom')
+			// new Load('.day_bottom')
 		this.load.template()
 		this.load.render()
 	}
@@ -66,6 +67,7 @@ export class Search {
 				this.pageSize = res.data.pageSize
 				this.total = res.data.total
 				this.maxPage = Math.round(this.total/this.pageSize)
+				commonData.playerList = res.data.list
 				let a = res.data.list.map(item=>{
 					let time = this.formatTime(item.interval)
 					return `<li class="search_song_li" data-singmid='${item.songmid}'>
@@ -81,11 +83,13 @@ export class Search {
 				}).join('')
 				$('.day_bottom_ul').append(a)
 				$('.search_song_li').on('click',function(e){
-					let load = new Load('',true)
-					load.template(this)
+					let load1 = load('',true)
+					load1.template(this)
 					let songmid = e.currentTarget.dataset.singmid
-					let song = new GetMusicData()
-					song.getData(songmid,load,this)
+					let song = getMusicData
+					song.getData(songmid,load1,this)
+					commonData.playerListRender(songmid)
+
 				})
 			}
 		})

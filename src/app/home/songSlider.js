@@ -1,21 +1,19 @@
 
-import {Lyric,Load,GetMusicData} from "../component/app";
-// import {GetMusicData} from '../commonFunc/getMusicData';
+import {commonData, getMusicData, lyric, load} from "../component/app";
 
 export class SongSlider {
 	constructor(tab, container) {
 		this.container = container
 		this.tab = tab
-		this.area = $(`${this.tab}>li`)
-		this.player
-		this.songmid
-		this.song
+		this.player = null
+		this.songmid= null
+		this.song = getMusicData
 		this.showlist = {}
-		this.Lyric = new Lyric()
+		this.Lyric = lyric
 	}
 	template(picUrl, songUrl, item) {
 		let text = `
-		<a class="song_mid" data-songmid="${item.mid}">
+		<a class="song_mid"  data-songmid="${item.mid}">
 			<div>
 			    <img  class="song_pic" src="${picUrl}"
 			         alt="">
@@ -36,7 +34,7 @@ export class SongSlider {
 	}
 	//判断地区
 	decideArea() {
-		this.load = new Load('.song_list_ul',true)
+		this.load = load('.song_list_ul',true)
 		this.load.template()
 		let area = 0
 		this.render(area)
@@ -74,17 +72,19 @@ export class SongSlider {
 				$(this.container)
 					.html('')
 				this.showlist = res.data.list.splice(0, 10)
-				this.showlist.map(item => {
+				commonData.playerList = this.showlist
+				this.showlist.map((item,index) => {
 					let picUrl = `https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg`
 					$(this.template(picUrl, null, item))
 						.appendTo($(this.container))
 				})
 				let on =  this.throttle(function (e){
-							let song = new GetMusicData()
-							song.getData (_this.songmid,null ,_this.Lyric)
+						_this.song.getData (_this.songmid,null ,_this.Lyric)
 				},1500)
 				$ (`.song_mid`).on ('click', (e)=>{
 					this.songmid = e.currentTarget.dataset.songmid
+					let index = $(e.currentTarget).parent().index()
+					commonData.index = index
 					on()
 				})
 			}

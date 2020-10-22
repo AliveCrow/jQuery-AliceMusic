@@ -1,10 +1,10 @@
-import {Load,SongList} from "../component/app";
+import {load, songList} from "../component/app";
 
 
 export class DayRec{
 	constructor(el) {
 		this.el =el
-		this.load= new Load(this.el , true)
+		this.load= load(this.el , true)
 		this.load.template()
 	}
 
@@ -21,7 +21,7 @@ export class DayRec{
 
 		$.ajax(settings).done(function (res) {
 			_this.load.remove()
-			let dayRec = new SongList('.day_rec',res.data,true)
+			let dayRec = songList('.day_rec',res.data,true)
 			dayRec.template(res.data.logo)
 		});
 	}

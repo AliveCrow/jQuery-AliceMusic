@@ -123,6 +123,59 @@
             fill: $warning;
           }
         }
+        .list_group{
+          position: relative;
+          .list{
+            margin-left: 10px;
+            fill: #fff;
+            &:hover{
+              fill: $nav-hover-color;
+            }
+          }
+          .list_group_ul{
+            width: 200px;
+            max-height: 330px;
+            overflow-y: auto;
+            position: absolute;
+            background-color: $footer-bg-color;
+            bottom: 40px;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .8);
+            &::-webkit-scrollbar-thumb{
+              width: 2px;
+              background-color: #70ac00;
+            }
+            &::-webkit-scrollbar-track{
+              background-color: #fff;
+              width: 3px;
+            }
+            &::-webkit-scrollbar{
+              width: 3px;
+            }
+            &:before{
+              content: '播放列表:';
+              font-size: .5rem;
+              margin-left: 10px;
+            }
+            .inplay{
+              color: $nav-hover-color;
+            }
+            li{
+              font-size: .8rem;
+              text-align: center;
+              line-height: 30px;
+              padding: 0 10px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              cursor: pointer;
+              &:hover{
+                color: rgba(#ffffff,.7)
+              }
+            }
+          }
+
+        }
 
         input[type=range] {
           position: relative;
@@ -217,12 +270,9 @@
     }
   }
 }
-//<svg t="1603208635643" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4813" width="200" height="200"><path d="M448 554.666667 149.333333 554.666667c-12.8 0-21.333333 8.533333-21.333333 21.333333 0 12.8 8.533333 21.333333 21.333333 21.333333l247.466667 0L49.066667 945.066667C44.8 949.333333 42.666667 953.6 42.666667 960c0 12.8 8.533333 21.333333 21.333333 21.333333 6.4 0 10.666667-2.133333 14.933333-6.4L426.666667 627.2 426.666667 874.666667c0 12.8 8.533333 21.333333 21.333333 21.333333s21.333333-8.533333 21.333333-21.333333L469.333333 576C469.333333 563.2 460.8 554.666667 448 554.666667zM981.333333 64c0-12.8-8.533333-21.333333-21.333333-21.333333-6.4 0-10.666667 2.133333-14.933333 6.4L597.333333 396.8 597.333333 149.333333c0-12.8-8.533333-21.333333-21.333333-21.333333s-21.333333 8.533333-21.333333 21.333333l0 298.666667c0 12.8 8.533333 21.333333 21.333333 21.333333l298.666667 0c12.8 0 21.333333-8.533333 21.333333-21.333333s-8.533333-21.333333-21.333333-21.333333L627.2 426.666667 974.933333 78.933333C979.2 74.666667 981.333333 70.4 981.333333 64z" p-id="4814" fill="#ffffff"></path></svg>
 #player_all{
-  //opacity: 1;
   transform: translateY(95%);
-
-  transition: transform 1s cubic-bezier(.17,.67,.42,.98) .12s;
+  transition: transform 1s cubic-bezier(.17,.67,.42,.98) .05s;
   width:100%;
   height: 100%;
   background-color: $footer-bg-color;

@@ -13,12 +13,11 @@ export class Tab {
 		this.currentTab = 'home'
 		this.prevTab = null
 		this.showPage = 'home'
-		this.root = $ (`.home`)
 		this.slider = new ImgSlider ('.slider_ul', '.slider_ul li')
 		this.songSlider = new SongSlider ('.song_area_ul', '.song_list_ul')
 		this.Tip = tip
-		this.uin
-		this.qm_keyst
+		this.uin = 0
+		this.qm_keyst = 0
 		this.getCookie()
 
 	}

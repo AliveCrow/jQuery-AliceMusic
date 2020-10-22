@@ -1,6 +1,9 @@
+import {SetCookie} from "../nav/setCookie";
+import {Tab} from "../nav/tab";
+import {Search} from "../nav/search";
 
 
-export class Lyric {
+ class Lyric {
 	constructor() {
 		this.player = $ ('#player')
 		this.currentTime = 0
@@ -20,7 +23,6 @@ export class Lyric {
 			         </div>`
 		this.player.append (html)
 	}
-
 	getLyric(songmid) {
 		let _this = this
 		const settings = {
@@ -42,19 +44,14 @@ export class Lyric {
 				_this.startScroll ()
 			});
 	}
-
 	//歌词滚动
-	lyricTime(lyric) {
+	lyricTime(lyric) { //返回歌词显示的时间
 		return lyric.replace (/^\[(\d{2}):(\d{2}).*/, (match, p1, p2) => 60 * (+p1) + (+p2))
 	}
-
 	scrollLyric() {
 		let _this = this
+		//当前播放的时间
 		_this.currentTime = Math.round (_this.$audio ? _this.$audio.currentTime : _this.currentTime + 1)
-		// if (_this.index >= _this.lyric.length) {
-		// 	console.log ('结束了?')
-		// 	return
-		// }
 		for (let i = 0; i < _this.lyric.length; i++) {
 			if (_this.lyricTime (_this.lyric[i]) <= _this.currentTime && (!_this.lyric[i + 1] || this.lyricTime (_this.lyric[i + 1]) >= _this.currentTime)) {
 				let lt = $ ('.player-lyrics-line')
@@ -72,18 +69,15 @@ export class Lyric {
 				.css ('transform', `translateY(${y}px)`)
 		}
 	}
-
 	startScroll() {
 		this.stopScroll ()
 		this.intervalId = setInterval (
 			this.scrollLyric.bind (this)
 			, 1000)
 	}
-
 	stopScroll() {
 		clearInterval (this.intervalId)
 	}
-
 	resetScroll() {
 		this.stopScroll ()
 		this.currentTime = 0
@@ -95,18 +89,15 @@ export class Lyric {
 			$active.removeClass ('inactive')
 		}
 	}
-
 	toScroll(currentTime) {
 		this.currentTime = currentTime
 	}
-
 	restart() {
 		this.resetScroll ()
 		this.startScroll ()
 	}
 }
-
-export class Prograss {
+ class Prograss {
 	constructor(duration) {
 		this.nowTime = 0
 		this.duration = duration || 0
@@ -162,8 +153,7 @@ export class Prograss {
 		return `${min}:${sec}`
 	}
 }
-
-export class Load {
+ class Load {
 	constructor(slot, replace = false) {
 		this.slot = slot
 		this.instead = replace
@@ -206,8 +196,7 @@ export class Load {
 		this.dom.remove ()
 	}
 }
-
-export class Tip{
+ class Tip{
 	constructor() {
 		this.color={
 			'waring':'#E6A23C',
@@ -227,8 +216,7 @@ export class Tip{
 		},1500)
 	}
 }
-
-export class BtnState{
+ class BtnState{
 	constructor(el){
 		this.el = el
 		this.html = ``
@@ -261,8 +249,7 @@ export class BtnState{
 		}
 	}
 }
-
-export class Player {
+ class Player {
 	constructor(musicData) {
 		this.musicData = musicData
 		this.btn = new BtnState('.player_left')
@@ -270,7 +257,6 @@ export class Player {
 		this.duration= null
 		this.prev= null
 		this.Lyric= null
-
 	}
 	playerInit() {
 		this.prograss.start ()
@@ -287,7 +273,7 @@ export class Player {
 	}
 	hidden() {
 		$ ('.prograss_min')
-			.click ((e) => {
+			.click (() => {
 				$ ('#player')
 					.slideUp ()
 			})
@@ -300,33 +286,19 @@ export class Player {
 		this.show ()
 		this.render (volume)
 		this.btn.render ()
-		let audio = document.querySelector ('audio')
-		if (!audio) {
-			audio = document.createElement ('audio')
-			audio.id = `Player-${new Date ().getTime ()}`
-			audio.src = `${this.musicData.PlayerUrl}`;
-			audio.autoplay = true
-			// audio.loop = true
-			audio.volume = volume
-			$ (audio)
-				.on ('ended', () => {
-					this.$audio.play()
-					this.prograss.restart ()
-					lyric.restart()
-				})
-			document.body.appendChild (audio)
-			this.$audio = document.querySelector ('audio')
-			this.$audio.load ()
-			$ (this.$audio)
-				.on ('canplay', () => {
-					this.prograss = new Prograss(audio.duration)
-					this.duration = audio.duration
-					this.playerInit ()
-				})
-		} else {
-			this.newPlay ()
-		}
-
+		let audio = document.createElement ('audio')
+		audio.id = `Player-${new Date ().getTime ()}`
+		audio.src = `${this.musicData.PlayerUrl}`;
+		audio.volume = volume || 0.6
+		document.body.appendChild (audio)
+		this.$audio = document.querySelector ('audio')
+		$ (this.$audio)
+			.on ('canplay', () => {
+				this.$audio.play()
+				this.prograss = new Prograss(audio.duration)
+				this.duration = audio.duration
+				this.playerInit ()
+			})
 		return audio
 	}
 	render(volume) {
@@ -346,6 +318,11 @@ export class Player {
 				<path d="M580.2 907.1c-20.2 0-39.6-6.2-56.2-17.8L308.8 731.8c-11.5-8-25.7-12.5-40.5-12.5h-74.4c-54 0-97.9-43.9-97.9-97.9V402.7c0-54 43.9-97.9 97.9-97.9h74.4c14.8 0 29-4.5 41.1-12.9l214.1-156.7c0.2-0.1 0.4-0.3 0.6-0.4 35.6-24.9 82.6-23.6 116.9 3.3 23.3 18.3 37.3 48 37.3 79.6v589.4c0 28-10.9 54.4-29.8 72.5-18.8 17.7-43 27.5-68.3 27.5zM193.9 375.6c-14.9 0-27.1 12.1-27.1 27.1v218.7c0 14.9 12.1 27.1 27.1 27.1h74.4c29.4 0 57.6 8.9 81.7 25.7l215.3 157.5c4 2.8 9.4 4.5 14.9 4.5 5 0 12.4-1.4 19.3-8 4.9-4.7 7.8-12.6 7.8-21.2V217.6c0-10-3.8-18.9-10.1-23.8-9.7-7.6-22.3-8.1-32.3-1.2L350.6 349.5c-24.7 17.3-52.9 26.2-82.3 26.2h-74.4z" fill="#ffffff" p-id="3384" data-spm-anchor-id="a313x.7781069.0.i9" class=""></path><path d="M837.7 694.9c-6.5 0-13.1-1.8-19-5.5-16.5-10.5-21.4-32.4-10.9-48.9 65.9-103.6 65.9-193.5-0.2-282.9-11.6-15.7-8.3-37.9 7.4-49.6s37.9-8.3 49.6 7.4c83.5 112.9 84.5 235.1 3 363.1-6.7 10.6-18.2 16.4-29.9 16.4zM498.2 618.3c-19.6 0-35.4-15.9-35.4-35.4V441.2c0-19.6 15.9-35.4 35.4-35.4 19.6 0 35.4 15.9 35.4 35.4v141.7c0 19.6-15.8 35.4-35.4 35.4z"  p-id="3385" data-spm-anchor-id="a313x.7781069.0.i6" class="volume_line"></path>
 			</svg>
 			<input type="range" class="volume_range" min="0" max="1" step="0.01" value="${volume}" >
+			<div class="list_group">
+				<svg t="1603339918775" class="icon list" viewBox="0 0 1462 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4450" width="200" height="200"><path d="M1389.714286 146.285714H438.857143a73.142857 73.142857 0 1 1 0-146.285714h950.857143a73.142857 73.142857 0 1 1 0 146.285714zM731.428571 585.142857h-292.571428a73.142857 73.142857 0 0 1 0-146.285714h292.571428a73.142857 73.142857 0 0 1 0 146.285714z m658.285715 438.857143H438.857143a73.142857 73.142857 0 0 1 0-146.285714h950.857143a73.142857 73.142857 0 0 1 0 146.285714zM146.285714 146.285714H73.142857a73.142857 73.142857 0 1 1 0-146.285714h73.142857a73.142857 73.142857 0 0 1 0 146.285714z m0 438.857143H73.142857a73.142857 73.142857 0 1 1 0-146.285714h73.142857a73.142857 73.142857 0 0 1 0 146.285714z m0 438.857143H73.142857a73.142857 73.142857 0 1 1 0-146.285714h73.142857a73.142857 73.142857 0 0 1 0 146.285714z" p-id="4451"></path></svg>
+				<ul class="list_group_ul">
+				</ul>
+			</div>
 			</div>
 			<div class="ico_group">
 				<svg t="1603207544491" class="icon expansion" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6545" width="200" height="200">
@@ -373,24 +350,34 @@ export class Player {
 		`
 		$ ('.player_prograss')
 			.html (text)
+
 		this.prev = volume
-		$('.volume_range').css('background-size',`${Math.floor(volume*100)}%`).mouseenter(function (e){
+
+		$('.list_group_ul').hide()
+		$('.list').click(function (){
+			$('.list_group_ul').slideToggle()
+		}) //播放列表展示
+		$('.volume_range').css('background-size',`${Math.floor(volume*100)}%`).mouseenter(function (){
 			$(this).mousedown((e)=>{
 				$(this).mousemove((e)=>{
 					let vol = e.offsetX<=0?0:(e.offsetX>=100?100:e.offsetX)
 					$(this).val(vol/100)
 					$(this).css('background-size',`${vol}% 100%`)
 					_this.$audio.volume = e.offsetX<1 ? 0 : (e.offsetX>= 100 ? 1 : e.offsetX/100)
-					$(this).mouseup(()=>{
+					$(this).mouseup((e)=>{
 						_this.prev = $(this).val()
 						$(this).unbind('mousemove')
 					})
 				})
-
+			})
+			$(this).mouseup((e)=>{
+				$(this).val(e.offsetX/100)
+				$(this).css('background-size',`${e.offsetX}% 100%`)
+				$(this).unbind('mousemove')
 			})
 		})
 
-		$('.volume').click(function (e){
+		$('.volume').click(function (){
 			if(_this.$audio.muted){
 				$('.volume_range').val(_this.prev).css('background-size',`${_this.prev*100}% 100%`)
 			}else {
@@ -400,26 +387,23 @@ export class Player {
 		})
 
 		$('.music_progress').mouseenter(function (e){
-
 			let width = $(this).width()
 			let ofx = e.offsetX<=0?0:(e.offsetX>=width?100:e.offsetX)
 			let currentPosition = ofx/$(this).width()
-			$(this).mousedown((e)=>{
-
+			$(this).mousedown(()=>{
+				console.log (_this.$audio .duration * currentPosition)
 				lyric.toScroll(_this.$audio .duration * currentPosition)
 				_this.prograss.currentTime = _this.$audio .duration * currentPosition
 				_this.$audio.currentTime = _this.$audio .duration * currentPosition
 			})
-			$(document).unbind('mousedown');
-
 		})
 
-		$('.expansion').click(function (e){
+		$('.expansion').click(function (){
 			$('#player_all').css('transform','translateY(0%)')
 			$(this).css('display','none').siblings().css('display','block')
 		})
 
-		$('.withdraw').click(function (e){
+		$('.withdraw').click(function (){
 			$('#player_all').css('transform','translateY(95%)')
 			$(this).css('display','none').siblings().css('display','block')
 		})
@@ -438,35 +422,20 @@ export class Player {
 	}
 	newPlay() {
 		let audio = document.querySelector ('audio')
-		audio.id = `Player-${new Date ().getTime ()}`
 		audio.src = `${this.musicData.PlayerUrl}`;
-		audio.autoplay = true
+		// audio.autoplay = true
 		// audio.loop = true
-		$ (audio)
-			.on ('ended', () => {
-				this.$audio.play()
-				this.prograss.restart ()
-				lyric.restart()
-			})
-		document.body.appendChild (audio)
 		this.$audio = document.querySelector ('audio')
 		this.$audio.load ()
-		$ (this.$audio)
-			.on ('canplay', () => {
-				this.prograss = new Prograss(audio.duration)
-				this.prograss.reset (this.duration)
-				this.duration = audio.duration
-			})
 	}
 }
-
-export class SongList {
+ class SongList {
 	constructor(slot,data,showPic=true) {
 		this.slot = slot
 		this.data = data
 		this.showPic = showPic
+		this.songlist = []
 	}
-
 	template(imgurl) {
 		let html
 		if(this.showPic){
@@ -515,8 +484,8 @@ export class SongList {
 		return `${min}:${sec}`
 	}
 	render(){
-		let songlist = this.data.list || this.data.songlist
-		let list = songlist.map(item=>{
+		this.songlist = this.data.list || this.data.songlist
+		this.songlist.map(item=>{
 			let time = this.formatTime(item.interval)
 			let html = `<li class="song_list" data-songmid="${item.mid||item.songmid}">
 				<a>
@@ -534,22 +503,23 @@ export class SongList {
 		})
 		this.play()
 	}
-
 	play(){
+		let _this = this
 		$('.song_list').on('click',function (e){
-			console.log (this)
 			let load = new Load('',true)
 			load.template(this)
 			let songmid = e.currentTarget.dataset.songmid
+			commonData.playerList =_this.songlist
+			commonData.playerListRender(songmid)
 			let song = new GetMusicData()
 			song.getData(songmid,load,this)
+
 		})
 
 	}
 
 }
-
-export class GetMusicData {
+ class GetMusicData {
 	constructor() {
 		this.musicData = []
 		this.albumid = ''
@@ -560,7 +530,7 @@ export class GetMusicData {
 		this.volume= 0
 		this.pay_play = false
 		this.loadover = false
-
+		this.playList = []
 	}
 
 	getData(songmid,load,el) {
@@ -584,6 +554,7 @@ export class GetMusicData {
 	}
 
 	musicPlayUrl(songmid) {
+		let load_ico = $('.load_ico')
 		$.ajax({
 			method: "GET",
 			url: 'http://localhost:3300' +
@@ -592,15 +563,18 @@ export class GetMusicData {
 				if(res.result===400){
 					let tip = new Tip()
 					tip.template( `${res.errMsg}` ,'fail')
-					$('.load_ico').hide()
+					load_ico.hide()
 					return
 				}
+				$('audio').remove()
 				this.PlayerUrl = res.data
+
 				let player = new Player(this)
 				player.createAudio(this.volume)
 				lyric.template()
 				lyric.getLyric(songmid)
-				$('.load_ico').hide()
+				commonData.playerListRender(songmid)
+				load_ico.hide()
 			}
 		})
 
@@ -611,6 +585,82 @@ export class GetMusicData {
 	}
 
 }
+ class CommonData{
+	constructor() {
+		this.playerList = []
+		this.index = 0
+		this.maxlength = 0
+		this.end = false
+	}
+	playerListRender(songmid){
+		let _this = this
+		let audio = document.querySelector ('audio')
+		this.maxlength = this.playerList.length
+		this.playerList.map(item=>{
+			let html =  `<li class="player_list" data-songmid="${item.mid || item.songmid}" >${item.name ||item.songname}</li>`
+			let ul = $('.list_group_ul')
+			ul.append(html)
+		})
+		$(`.list_group_ul>li[data-songmid=${songmid}]`).addClass('inplay')
+		$('.list_group_ul>li').click(function (e){
+			$(audio).remove()
+			GetMusicData.prototype.getData(e.target.dataset.songmid,null ,lyric)
+			_this.index = $(this).index()
+		})
+		$ (audio)
+			.on ('ended', () => {
+				this.index +=1
+				if(commonData.index>commonData.maxlength-1){
+					commonData.index = 0
+				}
+				GetMusicData.prototype.getData($('.list_group_ul>li')[commonData.index].dataset.songmid,null ,lyric)
+			})
 
-export const lyric= new Lyric()
+
+	}
+}
+
+
+export const lyric = new Lyric()
 export const tip = new Tip();
+export const btnState=(slot)=>new BtnState(slot)
+export const prograss=(duration)=> new Prograss(duration)
+export const load = (slot, replace = false) =>new Load(slot, replace)
+export const player = (musicData)=> new Player(musicData)
+export const songList = (slot,data,showPic = true)=>new SongList(slot,data,showPic)
+export const getMusicData = new GetMusicData()
+export const commonData = new CommonData()
+export const init=()=>{
+	$('.cookie_form').hide()
+	$(function () {
+		$.ajax({
+			method:'GET',
+			url:`http://localhost:3300/user/cookie`,
+			success:res=>{
+				let qm_keyst = res.data.userCookie.qm_keyst
+				let uin = res.data.userCookie.uin
+				if(qm_keyst === undefined || uin === undefined){
+					tip.template('欢迎━(*｀∀´*)ノ亻! Cookie未设置','waring')
+					new SetCookie()
+				}else {
+					tip.template('欢迎━(*｀∀´*)ノ亻! Cookie获取成功','success')
+					$('.set_cookie').css({'background-color': `#E6A23C`}).text('清除cookie').click(()=>{
+						let cookie = new SetCookie()
+						cookie.deleteCookie()
+					})
+				}
+				$ ('#player')
+					.hide ()
+				let tab = new Tab ('.nav_ul>li')
+				tab.activeLi ()
+				tab.getCookie()
+				let search = new Search('.main')
+				search.init()
+			}
+		})
+	})
+};
+
+
+
+

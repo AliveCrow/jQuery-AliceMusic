@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "sass --watch scss/app.scss:scss/dist/app.css"
+    "scss": "sass --watch scss/app.scss:scss/dist/app.css",
+    "build": "rm -rf ./dist/ && webpack --config webpack.prod.config.js",
+    "start": "rm -rf ./dist/ && webpack-dev-server --open --config webpack.dev.config.js",
+    "start:dev": "webpack-dev-server --open --config webpack.config.js"
   },
   "keywords": [],
   "author": {
@@ -14,6 +17,19 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "sass": "^1.27.0"
+    "css-loader": "^5.0.0",
+    "dart-sass": "^1.25.0",
+    "file-loader": "^6.1.1",
+    "glob": "^7.1.6",
+    "html-loader": "^1.3.2",
+    "html-webpack-plugin": "^4.5.0",
+    "mini-css-extract-plugin": "^1.1.1",
+    "sass": "^1.27.0",
+    "sass-loader": "^10.0.3",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.2.0"
   }
 }
