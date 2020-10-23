@@ -1,12 +1,12 @@
 
-import {commonData, getMusicData, lyric, load} from "../component/app";
+import { commonData, getMusicData, lyric, load, api } from "../component/app";
 
 export class SongSlider {
 	constructor(tab, container) {
 		this.container = container
 		this.tab = tab
 		this.player = null
-		this.songmid= null
+		this.songmid = null
 		this.song = getMusicData
 		this.showlist = {}
 		this.Lyric = lyric
@@ -34,19 +34,19 @@ export class SongSlider {
 	}
 	//判断地区
 	decideArea() {
-		this.load = load('.song_list_ul',true)
+		this.load = load('.song_list_ul', true)
 		this.load.template()
 		let area = 0
 		this.render(area)
 		let _this = this
-		let prev =0
-		$(`${this.tab}>li`).click(function(e) {
+		let prev = 0
+		$(`${this.tab}>li`).click(function (e) {
 			_this.load.template()
 			area = $(this)
 				.index()
-			if(prev === area){
+			if (prev === area) {
 				_this.load.remove()
-			}else {
+			} else {
 				prev = area
 				$(this)
 					.addClass('active')
@@ -62,10 +62,10 @@ export class SongSlider {
 		let _this = this
 		$.ajax({
 			method: "GET",
-			url: 'http://localhost:3300' +
-				`/new/songs?type=${index || 0}`,
+			url: `${api}` +
+				`new/songs?type=${index || 0}`,
 			success: (res) => {
-				if(res.result ===100){
+				if (res.result === 100) {
 					this.load.remove()
 				}
 
@@ -73,38 +73,22 @@ export class SongSlider {
 					.html('')
 				this.showlist = res.data.list.splice(0, 10)
 				commonData.playerList = this.showlist
-				this.showlist.map((item,index) => {
+				this.showlist.map((item, index) => {
 					let picUrl = `https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg`
 					$(this.template(picUrl, null, item))
 						.appendTo($(this.container))
 				})
-				let on =  this.throttle(function (e){
-						_this.song.getData (_this.songmid,null ,_this.Lyric)
-				},1500)
-				$ (`.song_mid`).on ('click', (e)=>{
+
+				$(`.song_mid`).on('click', (e) => {
 					this.songmid = e.currentTarget.dataset.songmid
 					let index = $(e.currentTarget).parent().index()
 					commonData.index = index
-					on()
+					_this.song.getData(_this.songmid, null, _this.Lyric)
+					// on()
 				})
 			}
 		})
 
-	}
-	throttle(func, wait) {
-		let _this = this
-		let prev, timer
-		return function fn() {
-			let curr = Date.now()
-			let diff = curr - prev
-			if (!prev || diff >= wait) {
-				func()
-				prev = curr
-			} else if (diff < wait) {
-				clearTimeout(timer)
-				timer = setTimeout(fn, wait - diff)
-			}
-		}
 	}
 }
 

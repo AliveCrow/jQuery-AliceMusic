@@ -1,4 +1,4 @@
-
+import {api} from '../component/app'
 
 export class ImgSlider {
 	constructor(container, selector) {
@@ -59,8 +59,8 @@ export class ImgSlider {
 	render(){
 		$.ajax({
 			method: "GET",
-			url: 'http://localhost:3300' +
-				'/recommend/banner',
+			url: `${api}` +
+				'recommend/banner',
 			success: (res)=>{
 				for(let i=0;i<res.data.length;i++){
 					$(this.template(res.data[i].picUrl,res.data[i].h5Url)).appendTo($(this.container))

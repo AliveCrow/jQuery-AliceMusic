@@ -3,7 +3,7 @@ import {SongSlider} from "../home/songSlider";
 import {RenderRank} from "../rank/app";
 import {Mymusic} from '../my_music/app'
 import {DayRec} from "../day_rec/app"
-import {tip} from "../component/app";
+import {api, tip} from "../component/app";
 
 export class Tab {
 	constructor(selector) {
@@ -79,7 +79,7 @@ export class Tab {
 	getCookie(){
 		$.ajax({
 			method:'GET',
-			url:`http://localhost:3300/user/cookie`,
+			url:`${api}user/cookie`,
 			success:res=>{
 				this.qm_keyst = res.data.userCookie.qm_keyst
 				this.uin = res.data.userCookie.uin

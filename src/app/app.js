@@ -1,4 +1,4 @@
-import {init} from "./component/app";
+import { init } from "./component/app";
 
 init()
 

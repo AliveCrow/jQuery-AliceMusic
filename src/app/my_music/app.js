@@ -1,34 +1,34 @@
-import {load, tip, songList} from "../component/app";
+import { load, tip, songList, api } from "../component/app";
 
-export class Mymusic{
-	constructor(header,body) {
+export class Mymusic {
+	constructor(header, body) {
 		this.header = header
 		this.body = body
-		this.qq =''
-		this.headerload= load(this.header , true)
+		this.qq = ''
+		this.headerload = load(this.header, true)
 		this.headerload.template()
-		this.bodyload =load('.my_music_songlist' , false)
+		this.bodyload = load('.my_music_songlist', false)
 		this.bodyload.template()
-		this.data={
-			'nickname':'',
-			'headpic':'',
-			'lvinfo':'',
-			'mymusicid':0,
-			'mydissnum':0,
-			'mydisslist':'',
-			'dissid':0,
-			'list':''
+		this.data = {
+			'nickname': '',
+			'headpic': '',
+			'lvinfo': '',
+			'mymusicid': 0,
+			'mydissnum': 0,
+			'mydisslist': '',
+			'dissid': 0,
+			'list': ''
 		}
 		this.Tip = tip
 		this.getCookie()
 
 	}
-		renderHeader(){
-			let header = `
+	renderHeader() {
+		let header = `
             <img src="${this.data.headpic}" alt="">
             <div class="vip_container">
                 <span >${this.data.nickname}</span>
-                <svg t="1603109300551" style=" ${this.data.lvinfo===0?'display:none':'display:block'}" class="icon is_vip" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                <svg t="1603109300551" style=" ${this.data.lvinfo === 0 ? 'display:none' : 'display:block'}" class="icon is_vip" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
                      p-id="3757" width="200" height="200">
                     <path d="M886.4 403.2l-35.2 38.4-3.2 3.2-32 32-48 51.2-182.4 16-44.8 3.2-35.2 3.2-41.6 3.2-156.8 12.8L188.8 448l-6.4-6.4-35.2-38.4 169.6-185.6H704l182.4 185.6z"
                           fill="#FFFFFF" p-id="3758"></path>
@@ -41,111 +41,112 @@ export class Mymusic{
                 </svg>
             </div>
 			`
-			$(this.header).html(header)
-			this.headerload.remove()
-		}
-		renderMymusic(){
-			this.SongList = songList(this.body,this.data,false)
-			this.SongList.template(this.data.headpic)
-		}
-		renderDiss(){
-			//my_music_songlist
-			let html = `
+		$(this.header).html(header)
+		this.headerload.remove()
+	}
+	renderMymusic() {
+		this.SongList = songList(this.body, this.data, false)
+		this.SongList.template(this.data.headpic)
+	}
+	renderDiss() {
+		//my_music_songlist
+		let html = `
 				<div class="diss_list">
 					<ul>
 					</ul>
 				</div>
 			`
-			$('.my_music_songlist').append(html)
-			this.showDiss()
-		}
-		render(){
-			this.renderDiss()
-			$('.diss_list').hide()
+		$('.my_music_songlist').append(html)
+		this.showDiss()
+	}
+	render() {
+		this.renderDiss()
+		$('.diss_list').hide()
 		let _this = this
-			$('.mymusic_header_ul>li').on('click',function (e){
-				$(this).addClass('active').siblings().removeClass('active')
-				if($(e.currentTarget).hasClass('my_like active') ){
-					$('.my_music_songlist_ul').fadeIn()
-					$('.diss_list').fadeOut()
-				}else if($(e.currentTarget).hasClass('my_diss active')){
-					$('.my_music_songlist_ul').fadeOut()
-					$('.diss_list').fadeIn()
-					$('.diss_list>ul>li').on('click',function (e){
-						let dissid = e.currentTarget.dataset.dissid
-						_this.getMyDiss(dissid)
-					})
-				}
-			})
-		}
-		getCookie(){
-			$.ajax({
-				method:'GET',
-				url:`http://localhost:3300/user/cookie`,
-				success:res=>{
-					this.qq = res.data.userCookie.uin
-					if(!this.qq){
-						this.Tip.template('还没有设置cookie(⊙o⊙)…','waring')
-
-						return
-					}
-					this.getDetail()
-				}
-			})
-		}
-		getDetail(){
+		$('.mymusic_header_ul>li').on('click', function (e) {
+			$(this).addClass('active').siblings().removeClass('active')
+			if ($(e.currentTarget).hasClass('my_like active')) {
+				$('.my_music_songlist_ul').fadeIn()
+				$('.diss_list').fadeOut()
+			} else if ($(e.currentTarget).hasClass('my_diss active')) {
+				$('.my_music_songlist_ul').fadeOut()
+				$('.diss_list').fadeIn()
+				$('.diss_list>ul>li').on('click', function (e) {
+					let dissid = e.currentTarget.dataset.dissid
+					_this.getMyDiss(dissid)
+				})
+			}
+		})
+	}
+	getCookie() {
 		$.ajax({
-			method:'GET',
-			url:`http://localhost:3300/user/detail?id=${this.qq}`,
-			success:res=>{
-				this.data={
-					'nickname':res.data.creator.nick,
-					'headpic':'https://'+res.data.creator.headpic.slice(5),
-					'lvinfo':res.data.creator.lvinfo[0].lvinfo_bykey.url_params.length,
+			method: 'GET',
+			url: `${api}user/cookie`,
+			success: res => {
+				this.qq = res.data.userCookie.uin
+				if (!this.qq) {
+					this.Tip.template('还没有设置cookie(⊙o⊙)…', 'waring')
+
+					return
+				}
+				this.getDetail()
+			}
+		})
+	}
+	getDetail() {
+		$.ajax({
+			method: 'GET',
+			url: `${api}user/detail?id=${this.qq}`,
+			success: res => {
+				console.log(res);
+				this.data = {
+					'nickname': res.data.creator.nick,
+					'headpic': 'https://' + res.data.creator.headpic.slice(5),
+					'lvinfo': res.data.creator.lvinfo[0].lvinfo_bykey.url_params.length,
 					'mymusicid': res.data.mymusic[0].id,
-					'mydissnum':res.data.mydiss.num,
-					'mydisslist':res.data.mydiss.list, //dissid picurl title  subtitle
+					'mydissnum': res.data.mydiss.num,
+					'mydisslist': res.data.mydiss.list, //dissid picurl title  subtitle
 				}
 				this.renderHeader()
 				this.getMymusic()
 				this.render()
 			}
 		})
-		}
-		getMymusic(){
-			$.ajax({
-				method:'GET',
-				url:`http://localhost:3300/songlist?id=${this.data.mymusicid}`,
-				success:res=>{
-					this.data.list = res.data.songlist
-					this.bodyload.remove()
-					this.renderMymusic()
-				}
-			})
-		}
-		getMyDiss(dissid){
-			$.ajax({
-				method:'GET',
-				url:`http://localhost:3300/songlist?id=${dissid}`,
-				success:res=>{
-					$('.my_music').children().remove()
-					let ablist = songList('.my_music',res.data,true)
-					ablist.template(res.data.logo)
-				}
-			})
-		}
-		showDiss(){
+	}
+	getMymusic() {
+		$.ajax({
+			method: 'GET',
+			url: `${api}songlist?id=${this.data.mymusicid}`,
+			success: res => {
+				this.data.list = res.data.songlist
+				this.bodyload.remove()
+				this.renderMymusic()
+			}
+		})
+	}
+	getMyDiss(dissid) {
+		$.ajax({
+			method: 'GET',
+			url: `${api}songlist?id=${dissid}`,
+			success: res => {
+				$('.my_music').children().remove()
+				let ablist = songList('.my_music', res.data, true)
+				ablist.template(res.data.logo)
+			}
+		})
+	}
+	showDiss() {
 		let _this = this
-			this.data.mydisslist.map(item=>{
-				//"http://y.gtimg.cn/music/photo_new/T002R150x150M000000fQplQ3rXsxG.jpg?n=1" id
-				let html = `
+		this.data.mydisslist.map(item => {
+			//"http://y.gtimg.cn/music/photo_new/T002R150x150M000000fQplQ3rXsxG.jpg?n=1" id
+			let html = `
 					<li data-dissid="${item.dissid}" data-dissid="${item.dissid}">
 						<img src="${item.picurl}" alt="">
 						<span>${item.title}</span>
 					</li>
 				`
-				$('.diss_list>ul').append(html)
-			})
+			$('.diss_list>ul').append(html)
+		})
 
-		}
+	}
 }

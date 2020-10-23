@@ -1,159 +1,160 @@
-import {SetCookie} from "../nav/setCookie";
-import {Tab} from "../nav/tab";
-import {Search} from "../nav/search";
+import { SetCookie } from "../nav/setCookie";
+import { Tab } from "../nav/tab";
+import { Search } from "../nav/search";
 
 
- class Lyric {
+class Lyric {
 	constructor() {
-		this.player = $ ('#player')
+		this.player = $('#player')
 		this.currentTime = 0
 		this.index = 0
 		this.lyric = ''
-		this.$audio = document.querySelector ('audio')
+		this.$audio = document.querySelector('audio')
 		this.intervalId = null
 	}
 
 	//歌词渲染
 	template() {
-		$ ('#player_all')
-			.remove ()
+		$('#player_all')
+			.remove()
 		let html = `<div id="player_all" >
 				        <div class="lyric_box">
 				        </div>
 			         </div>`
-		this.player.append (html)
+		this.player.append(html)
 	}
 	getLyric(songmid) {
 		let _this = this
 		const settings = {
-			"url": `http://localhost:3300/lyric?songmid=${songmid}`,
+			"url": api + `lyric?songmid=${songmid}`,
+			// `http://localhost:3300/lyric?songmid=${songmid}`,
 			"method": "GET",
 		};
-		$.ajax (settings)
-			.done (function (response) {
+		$.ajax(settings)
+			.done(function (response) {
 				let lyric = response.data.lyric
-				lyric = lyric.match (/^\[\d{2}:\d{2}.\d{2}](.+)$/gm)
-				_this.resetScroll (lyric)
+				lyric = lyric.match(/^\[\d{2}:\d{2}.\d{2}](.+)$/gm)
+				_this.resetScroll(lyric)
 				_this.lyric = lyric
-				let html = lyric.map (item => {
-					return `<div class="player-lyrics-line">${item.slice (10)}</div>`
+				let html = lyric.map(item => {
+					return `<div class="player-lyrics-line">${item.slice(10)}</div>`
 				})
-					.join ("")
-				$ ('.lyric_box')
-					.append (html)
-				_this.startScroll ()
+					.join("")
+				$('.lyric_box')
+					.append(html)
+				_this.startScroll()
 			});
 	}
 	//歌词滚动
 	lyricTime(lyric) { //返回歌词显示的时间
-		return lyric.replace (/^\[(\d{2}):(\d{2}).*/, (match, p1, p2) => 60 * (+p1) + (+p2))
+		return lyric.replace(/^\[(\d{2}):(\d{2}).*/, (match, p1, p2) => 60 * (+p1) + (+p2))
 	}
 	scrollLyric() {
 		let _this = this
 		//当前播放的时间
-		_this.currentTime = Math.round (_this.$audio ? _this.$audio.currentTime : _this.currentTime + 1)
+		_this.currentTime = Math.round(_this.$audio ? _this.$audio.currentTime : _this.currentTime + 1)
 		for (let i = 0; i < _this.lyric.length; i++) {
-			if (_this.lyricTime (_this.lyric[i]) <= _this.currentTime && (!_this.lyric[i + 1] || this.lyricTime (_this.lyric[i + 1]) >= _this.currentTime)) {
-				let lt = $ ('.player-lyrics-line')
-				$ (lt[_this.index])
-					.removeClass ('inactive')
-				$ (lt[i])
-					.addClass ('inactive')
+			if (_this.lyricTime(_this.lyric[i]) <= _this.currentTime && (!_this.lyric[i + 1] || this.lyricTime(_this.lyric[i + 1]) >= _this.currentTime)) {
+				let lt = $('.player-lyrics-line')
+				$(lt[_this.index])
+					.removeClass('inactive')
+				$(lt[i])
+					.addClass('inactive')
 				_this.index = i
 				break
 			}
 		}
 		if (_this.index > 2) {
 			let y = -(_this.index - 2) * 60
-			$ ('.player-lyrics-line')
-				.css ('transform', `translateY(${y}px)`)
+			$('.player-lyrics-line')
+				.css('transform', `translateY(${y}px)`)
 		}
 	}
 	startScroll() {
-		this.stopScroll ()
-		this.intervalId = setInterval (
-			this.scrollLyric.bind (this)
+		this.stopScroll()
+		this.intervalId = setInterval(
+			this.scrollLyric.bind(this)
 			, 1000)
 	}
 	stopScroll() {
-		clearInterval (this.intervalId)
+		clearInterval(this.intervalId)
 	}
 	resetScroll() {
-		this.stopScroll ()
+		this.stopScroll()
 		this.currentTime = 0
 		this.index = 0
-		$ ('.player-lyrics-line')
-			.css ('transform', `translateY(0px)`)
-		let $active = $ ('.inactive')
+		$('.player-lyrics-line')
+			.css('transform', `translateY(0px)`)
+		let $active = $('.inactive')
 		if ($active) {
-			$active.removeClass ('inactive')
+			$active.removeClass('inactive')
 		}
 	}
 	toScroll(currentTime) {
 		this.currentTime = currentTime
 	}
 	restart() {
-		this.resetScroll ()
-		this.startScroll ()
+		this.resetScroll()
+		this.startScroll()
 	}
 }
- class Prograss {
+class Prograss {
 	constructor(duration) {
 		this.nowTime = 0
 		this.duration = duration || 0
 		this.prograss = 0
 		this.intervalId = null
-		this.$progressRate = $ ('.music_progress')
-		this.$playedTime = $ ('.played_time')
-		this.$allTime = $ ('.duration')
-		this.$audio = document.querySelector ('audio')
-		this.$allTime.html (this.formatTime (this.duration))
+		this.$progressRate = $('.music_progress')
+		this.$playedTime = $('.played_time')
+		this.$allTime = $('.duration')
+		this.$audio = document.querySelector('audio')
+		this.$allTime.html(this.formatTime(this.duration))
 	}
 
 	start() {
-		this.stop ()
-		this.intervalId = setInterval (() => {
-			this.update ()
+		this.stop()
+		this.intervalId = setInterval(() => {
+			this.update()
 		}, 10)
 	}
 
 	stop() {
-		clearInterval (this.intervalId)
+		clearInterval(this.intervalId)
 	}
 
 	restart() {
-		this.reset ()
-		this.start ()
+		this.reset()
+		this.start()
 	}
 
 	reset(duration) {
-		this.stop ()
+		this.stop()
 		this.nowTime = 0
 		this.prograss = 0
-		this.$progressRate.attr ('value', '0')
-		this.$playedTime.html (this.formatTime (this.$audio.currentTime))
+		this.$progressRate.attr('value', '0')
+		this.$playedTime.html(this.formatTime(this.$audio.currentTime))
 		if (duration) {
 			this.duration = +duration
-			this.$allTime.html (this.formatTime (this.duration))
+			this.$allTime.html(this.formatTime(this.duration))
 		}
 	}
 
 	update() {
 		this.prograss = this.$audio.currentTime / this.duration
-		this.$progressRate.attr ('value', `${this.prograss * 100}`)
-		this.$progressRate.css ('background-size', `${this.prograss * 100}% 100%`)
-		this.$playedTime.html (this.formatTime (this.$audio.currentTime))
+		this.$progressRate.attr('value', `${this.prograss * 100}`)
+		this.$progressRate.css('background-size', `${this.prograss * 100}% 100%`)
+		this.$playedTime.html(this.formatTime(this.$audio.currentTime))
 	}
 
 	formatTime(time) {
-		let min = Math.floor (time / 60)
-		let sec = Math.floor (time % 60)
+		let min = Math.floor(time / 60)
+		let sec = Math.floor(time % 60)
 		if (min < 10) min = '0' + min
 		if (sec < 10) sec = '0' + sec
 		return `${min}:${sec}`
 	}
 }
- class Load {
+class Load {
 	constructor(slot, replace = false) {
 		this.slot = slot
 		this.instead = replace
@@ -168,137 +169,141 @@ import {Search} from "../nav/search";
               fill="#73ac00" p-id="3290"></path>
     </svg>
 		`
-		let dom = document.createElement ('div')
+		let dom = document.createElement('div')
 		dom.className = 'load_ico'
-		$ (dom)
-			.append (html)
+		$(dom)
+			.append(html)
 		if (this.instead === true) {
-			$ (el || this.slot).children ().hide ()
-			$ (el || this.slot).append ($ (dom))
+			$(el || this.slot).children().hide()
+			$(el || this.slot).append($(dom))
 		} else {
-			$ (el || this.slot)
-				.append ($ (dom))
+			$(el || this.slot)
+				.append($(dom))
 		}
-		this.dom = $ (dom)
+		this.dom = $(dom)
 
 	}
 
 	render() {
-		this.dom.fadeIn ()
+		this.dom.fadeIn()
 	}
 
 	remove(el) {
 		if (this.instead === true) {
-			$ (el || this.slot)
-				.children ()
-				.fadeIn ()
+			$(el || this.slot)
+				.children()
+				.fadeIn()
 		}
-		this.dom.remove ()
+		this.dom.remove()
 	}
 }
- class Tip{
+class Tip {
 	constructor() {
-		this.color={
-			'waring':'#E6A23C',
-			'success':'#67C23A',
-			'fail':'#F56C6C'
+		this.color = {
+			'waring': '#E6A23C',
+			'success': '#67C23A',
+			'fail': '#F56C6C'
 		}
 	}
-	template(message,colorType){
+	template(message, colorType) {
 		let html = `
 		<div class="tip" style="background-color:${this.color[colorType]} ">
             <span>${message}</span>
 		</div>
 		`
 		$(html).appendTo($('body'))
-		setTimeout(()=>{
+		setTimeout(() => {
 			$('.tip').fadeOut()
-		},1500)
+		}, 1500)
 	}
 }
- class BtnState{
-	constructor(el){
+class BtnState {
+	constructor(el) {
 		this.el = el
 		this.html = ``
 		this.template()
 	}
-	template(){
+	template() {
 		this.html = `<div class="change_state_btn">
         <svg t="1602743985614" class="icon play" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8616" width="200" height="200"><path d="M512 0C229.216 0 0 229.216 0 512s229.216 512 512 512 512-229.216 512-512S794.784 0 512 0zM512 928c-229.76 0-416-186.24-416-416S282.24 96 512 96s416 186.24 416 416S741.76 928 512 928zM384 288 768 512 384 736z" p-id="8617" fill="#ffffff"></path></svg>
         <svg t="1602744019440" class="icon pause" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8857" width="200" height="200"><path d="M512 0C229.216 0 0 229.216 0 512s229.216 512 512 512 512-229.216 512-512S794.784 0 512 0zM512 928c-229.76 0-416-186.24-416-416S282.24 96 512 96s416 186.24 416 416S741.76 928 512 928zM320 320 448 320 448 704 320 704zM576 320 704 320 704 704 576 704z" p-id="8858" fill="#ffffff"></path></svg>
     </div>`
 	}
-	render(){
+	render() {
 		$('.change_state_btn').remove()
 		$(this.el).append(this.html)
-		$('.play').css('display','none')
-		$('.pause').css('display','block')
+		$('.play').css('display', 'none')
+		$('.pause').css('display', 'block')
 	}
-	isPlay(audio){
-		if(audio){
-			if(audio.paused){
-				$('.play').css('display','block')
-				$('.pause').css('display','none')
-			}else{
-				$('.play').css('display','none')
-				$('.pause').css('display','block')
+	isPlay(audio) {
+		if (audio) {
+			if (audio.paused) {
+				$('.play').css('display', 'block')
+				$('.pause').css('display', 'none')
+			} else {
+				$('.play').css('display', 'none')
+				$('.pause').css('display', 'block')
 			}
-		}else{
-			$('.play').css('display','block')
-			$('.pause').css('display','none')
+		} else {
+			$('.play').css('display', 'block')
+			$('.pause').css('display', 'none')
 		}
 	}
 }
- class Player {
+class Player {
 	constructor(musicData) {
 		this.musicData = musicData
 		this.btn = new BtnState('.player_left')
 		this.$audio = null
-		this.duration= null
-		this.prev= null
-		this.Lyric= null
+		this.duration = null
+		this.prev = null
+		this.Lyric = null
 	}
 	playerInit() {
-		this.prograss.start ()
-		$ ('.play')
-			.click (() => {
-				this.onPlay ()
-				this.btn.isPlay (this.$audio)
+		this.prograss.start()
+		$('.play')
+			.click(() => {
+				this.onPlay()
+				this.btn.isPlay(this.$audio)
 			})
-		$ ('.pause')
-			.click (() => {
-				this.pause ()
-				this.btn.isPlay (this.$audio)
+		$('.pause')
+			.click(() => {
+				this.pause()
+				this.btn.isPlay(this.$audio)
 			})
 	}
 	hidden() {
-		$ ('.prograss_min')
-			.click (() => {
-				$ ('#player')
-					.slideUp ()
+		$('.prograss_min')
+			.click(() => {
+				$('#player')
+					.slideUp()
 			})
 	}
 	show() {
-		$ ('#player')
+		$('#player')
 			.slideDown()
 	}
 	createAudio(volume) {
-		this.show ()
-		this.render (volume)
-		this.btn.render ()
-		let audio = document.createElement ('audio')
-		audio.id = `Player-${new Date ().getTime ()}`
+		this.show()
+		this.render(volume)
+		this.btn.render()
+		let audio = document.createElement('audio')
+		audio.id = `Player-${new Date().getTime()}`
 		audio.src = `${this.musicData.PlayerUrl}`;
 		audio.volume = volume || 0.6
-		document.body.appendChild (audio)
-		this.$audio = document.querySelector ('audio')
-		$ (this.$audio)
-			.on ('canplay', () => {
-				this.$audio.play()
-				this.prograss = new Prograss(audio.duration)
-				this.duration = audio.duration
-				this.playerInit ()
-			})
+		document.body.appendChild(audio)
+		this.$audio = document.querySelector('audio')
+		$(this.$audio).on('canplaythrough', () => {
+			console.log('233');
+		})
+
+		$(this.$audio).on('canplay', () => {
+			console.log('canplay');
+			this.$audio.play()
+			this.prograss = new Prograss(audio.duration)
+			this.duration = audio.duration
+			this.playerInit()
+		})
 		return audio
 	}
 	render(volume) {
@@ -348,89 +353,89 @@ import {Search} from "../nav/search";
         </div>
     </div>
 		`
-		$ ('.player_prograss')
-			.html (text)
+		$('.player_prograss')
+			.html(text)
 
 		this.prev = volume
 
 		$('.list_group_ul').hide()
-		$('.list').click(function (){
+		$('.list').click(function () {
 			$('.list_group_ul').slideToggle()
 		}) //播放列表展示
-		$('.volume_range').css('background-size',`${Math.floor(volume*100)}%`).mouseenter(function (){
-			$(this).mousedown((e)=>{
-				$(this).mousemove((e)=>{
-					let vol = e.offsetX<=0?0:(e.offsetX>=100?100:e.offsetX)
-					$(this).val(vol/100)
-					$(this).css('background-size',`${vol}% 100%`)
-					_this.$audio.volume = e.offsetX<1 ? 0 : (e.offsetX>= 100 ? 1 : e.offsetX/100)
-					$(this).mouseup((e)=>{
+		$('.volume_range').css('background-size', `${Math.floor(volume * 100)}%`).mouseenter(function () {
+			$(this).mousedown((e) => {
+				$(this).mousemove((e) => {
+					let vol = e.offsetX <= 0 ? 0 : (e.offsetX >= 100 ? 100 : e.offsetX)
+					$(this).val(vol / 100)
+					$(this).css('background-size', `${vol}% 100%`)
+					_this.$audio.volume = e.offsetX < 1 ? 0 : (e.offsetX >= 100 ? 1 : e.offsetX / 100)
+					$(this).mouseup((e) => {
 						_this.prev = $(this).val()
 						$(this).unbind('mousemove')
 					})
 				})
 			})
-			$(this).mouseup((e)=>{
-				$(this).val(e.offsetX/100)
-				$(this).css('background-size',`${e.offsetX}% 100%`)
+			$(this).mouseup((e) => {
+				$(this).val(e.offsetX / 100)
+				$(this).css('background-size', `${e.offsetX}% 100%`)
 				$(this).unbind('mousemove')
 			})
 		})
 
-		$('.volume').click(function (){
-			if(_this.$audio.muted){
-				$('.volume_range').val(_this.prev).css('background-size',`${_this.prev*100}% 100%`)
-			}else {
-				$('.volume_range').val(0).css('background-size',`0% 100%`)
+		$('.volume').click(function () {
+			if (_this.$audio.muted) {
+				$('.volume_range').val(_this.prev).css('background-size', `${_this.prev * 100}% 100%`)
+			} else {
+				$('.volume_range').val(0).css('background-size', `0% 100%`)
 			}
 			_this.$audio.muted = !_this.$audio.muted
 		})
 
-		$('.music_progress').mouseenter(function (e){
+		$('.music_progress').mouseenter(function (e) {
 			let width = $(this).width()
-			let ofx = e.offsetX<=0?0:(e.offsetX>=width?100:e.offsetX)
-			let currentPosition = ofx/$(this).width()
-			$(this).mousedown(()=>{
-				console.log (_this.$audio .duration * currentPosition)
-				lyric.toScroll(_this.$audio .duration * currentPosition)
-				_this.prograss.currentTime = _this.$audio .duration * currentPosition
-				_this.$audio.currentTime = _this.$audio .duration * currentPosition
+			let ofx = e.offsetX <= 0 ? 0 : (e.offsetX >= width ? 100 : e.offsetX)
+			let currentPosition = ofx / $(this).width()
+			$(this).mousedown(() => {
+				console.log(_this.$audio.duration * currentPosition)
+				lyric.toScroll(_this.$audio.duration * currentPosition)
+				_this.prograss.currentTime = _this.$audio.duration * currentPosition
+				_this.$audio.currentTime = _this.$audio.duration * currentPosition
 			})
 		})
 
-		$('.expansion').click(function (){
-			$('#player_all').css('transform','translateY(0%)')
-			$(this).css('display','none').siblings().css('display','block')
+		$('.expansion').click(function () {
+			$('#player_all').css('transform', 'translateY(0%)')
+			$(this).css('display', 'none').siblings().css('display', 'block')
 		})
 
-		$('.withdraw').click(function (){
-			$('#player_all').css('transform','translateY(95%)')
-			$(this).css('display','none').siblings().css('display','block')
+		$('.withdraw').click(function () {
+			$('#player_all').css('transform', 'translateY(95%)')
+			$(this).css('display', 'none').siblings().css('display', 'block')
 		})
 	}
 	pause() {
 		lyric.stopScroll()
-		this.prograss.stop ()
+		this.prograss.stop()
 		this.$audio
-			.pause ()
+			.pause()
 	}
 	onPlay() {
 		this.prograss.start()
 		lyric.startScroll()
 		this.$audio
-			.play ()
+			.play()
 	}
 	newPlay() {
-		let audio = document.querySelector ('audio')
+		let audio = document.querySelector('audio')
 		audio.src = `${this.musicData.PlayerUrl}`;
 		// audio.autoplay = true
 		// audio.loop = true
-		this.$audio = document.querySelector ('audio')
-		this.$audio.load ()
+		this.$audio = document.querySelector('audio')
+		// this.$audio.load()
 	}
 }
- class SongList {
-	constructor(slot,data,showPic=true) {
+class SongList {
+	constructor(slot, data, showPic = true) {
 		this.slot = slot
 		this.data = data
 		this.showPic = showPic
@@ -438,7 +443,7 @@ import {Search} from "../nav/search";
 	}
 	template(imgurl) {
 		let html
-		if(this.showPic){
+		if (this.showPic) {
 			html = `
 <div class="ablum_song">
 			<div class="day_top">
@@ -447,7 +452,7 @@ import {Search} from "../nav/search";
                      alt="">
                 <div class="day_top_text">
                     <p>${this.data.dissname || this.data.info.title}</p>
-                    <p style="${this.data.update?'display:block':'display:none'}">更新于:${this.data.update}</p>
+                    <p style="${this.data.update ? 'display:block' : 'display:none'}">更新于:${this.data.update}</p>
                 </div>
             </div>
             <div class="day_bottom">
@@ -459,7 +464,7 @@ import {Search} from "../nav/search";
 </div>
 
 		`
-		}else {
+		} else {
 			html = `
 		<div class="ablum_song">
 		            <div class="day_bottom">
@@ -475,26 +480,26 @@ import {Search} from "../nav/search";
 		$(this.slot).append(html)
 		this.render()
 	}
-	formatTime(time){
-		let min = Math.floor(time /60)
-		let sec = Math.floor(time%60)
-		if(min<10)min = '0'+min
-		if(sec<10)sec = '0'+sec
+	formatTime(time) {
+		let min = Math.floor(time / 60)
+		let sec = Math.floor(time % 60)
+		if (min < 10) min = '0' + min
+		if (sec < 10) sec = '0' + sec
 
 		return `${min}:${sec}`
 	}
-	render(){
+	render() {
 		this.songlist = this.data.list || this.data.songlist
-		this.songlist.map(item=>{
+		this.songlist.map(item => {
 			let time = this.formatTime(item.interval)
-			let html = `<li class="song_list" data-songmid="${item.mid||item.songmid}">
+			let html = `<li class="song_list" data-songmid="${item.mid || item.songmid}">
 				<a>
 					<span>
-                        ${item.name ||item.songname}
-                        <span class="song_isvip">${item.pay.payplay?'vip':'no'}</span>
+                        ${item.name || item.songname}
+                        <span class="song_isvip">${item.pay.payplay ? 'vip' : 'no'}</span>
                         </span>
 					
-					<span>${item.singerName||item.singer[0].name}</span>
+					<span>${item.singerName || item.singer[0].name}</span>
 					<span>${time}</span>
 				</a>
 			</li>`
@@ -503,23 +508,23 @@ import {Search} from "../nav/search";
 		})
 		this.play()
 	}
-	play(){
+	play() {
 		let _this = this
-		$('.song_list').on('click',function (e){
-			let load = new Load('',true)
+		$('.song_list').on('click', function (e) {
+			let load = new Load('', true)
 			load.template(this)
 			let songmid = e.currentTarget.dataset.songmid
-			commonData.playerList =_this.songlist
+			commonData.playerList = _this.songlist
 			commonData.playerListRender(songmid)
 			let song = new GetMusicData()
-			song.getData(songmid,load,this)
+			song.getData(songmid, load, this)
 
 		})
 
 	}
 
 }
- class GetMusicData {
+class GetMusicData {
 	constructor() {
 		this.musicData = []
 		this.albumid = ''
@@ -527,17 +532,17 @@ import {Search} from "../nav/search";
 		this.PicUrl = ''
 		this.singerName = ''
 		this.songName = ''
-		this.volume= 0
+		this.volume = 0
 		this.pay_play = false
 		this.loadover = false
 		this.playList = []
 	}
 
-	getData(songmid,load,el) {
+	getData(songmid, load, el) {
 		$.ajax({
 			method: "GET",
-			url: 'http://localhost:3300' + `/song?songmid=${songmid}`,
-			dataType:'json',
+			url: `${api}` + `song?songmid=${songmid}`,
+			dataType: 'json',
 			success: res => {
 				this.albumid = res.data.track_info.album.mid
 				this.PicUrl = this.musicPicUrl(this.albumid)
@@ -545,8 +550,8 @@ import {Search} from "../nav/search";
 				this.songName = res.data.track_info.name
 				this.singerName = res.data.track_info.singer[0].name
 				this.volume = res.data.track_info.volume.peak
-				this.musicPlayUrl(songmid,el)
-				if(load){
+				this.musicPlayUrl(songmid, el)
+				if (load) {
 					load.remove(el)
 				}
 			}
@@ -557,12 +562,17 @@ import {Search} from "../nav/search";
 		let load_ico = $('.load_ico')
 		$.ajax({
 			method: "GET",
-			url: 'http://localhost:3300' +
-				`/song/url?id=${songmid}`,
+			url: api +
+				`song/url?id=${songmid}`,
+			"headers": {
+				"Content-Range": "bytes=0--1,-1",
+				"Content-Type": "audio/mpeg"
+			},
 			success: res => {
-				if(res.result===400){
+				console.log('2333');
+				if (res.result === 400) {
 					let tip = new Tip()
-					tip.template( `${res.errMsg}` ,'fail')
+					tip.template(`${res.errMsg}`, 'fail')
 					load_ico.hide()
 					return
 				}
@@ -585,35 +595,35 @@ import {Search} from "../nav/search";
 	}
 
 }
- class CommonData{
+class CommonData {
 	constructor() {
 		this.playerList = []
 		this.index = 0
 		this.maxlength = 0
 		this.end = false
 	}
-	playerListRender(songmid){
+	playerListRender(songmid) {
 		let _this = this
-		let audio = document.querySelector ('audio')
+		let audio = document.querySelector('audio')
 		this.maxlength = this.playerList.length
-		this.playerList.map(item=>{
-			let html =  `<li class="player_list" data-songmid="${item.mid || item.songmid}" >${item.name ||item.songname}</li>`
+		this.playerList.map(item => {
+			let html = `<li class="player_list" data-songmid="${item.mid || item.songmid}" >${item.name || item.songname}</li>`
 			let ul = $('.list_group_ul')
 			ul.append(html)
 		})
 		$(`.list_group_ul>li[data-songmid=${songmid}]`).addClass('inplay')
-		$('.list_group_ul>li').click(function (e){
+		$('.list_group_ul>li').click(function (e) {
 			$(audio).remove()
-			GetMusicData.prototype.getData(e.target.dataset.songmid,null ,lyric)
+			GetMusicData.prototype.getData(e.target.dataset.songmid, null, lyric)
 			_this.index = $(this).index()
 		})
-		$ (audio)
-			.on ('ended', () => {
-				this.index +=1
-				if(commonData.index>commonData.maxlength-1){
+		$(audio)
+			.on('ended', () => {
+				this.index += 1
+				if (commonData.index > commonData.maxlength - 1) {
 					commonData.index = 0
 				}
-				GetMusicData.prototype.getData($('.list_group_ul>li')[commonData.index].dataset.songmid,null ,lyric)
+				GetMusicData.prototype.getData($('.list_group_ul>li')[commonData.index].dataset.songmid, null, lyric)
 			})
 
 
@@ -623,36 +633,39 @@ import {Search} from "../nav/search";
 
 export const lyric = new Lyric()
 export const tip = new Tip();
-export const btnState=(slot)=>new BtnState(slot)
-export const prograss=(duration)=> new Prograss(duration)
-export const load = (slot, replace = false) =>new Load(slot, replace)
-export const player = (musicData)=> new Player(musicData)
-export const songList = (slot,data,showPic = true)=>new SongList(slot,data,showPic)
+export const btnState = (slot) => new BtnState(slot)
+export const prograss = (duration) => new Prograss(duration)
+export const load = (slot, replace = false) => new Load(slot, replace)
+export const player = (musicData) => new Player(musicData)
+export const songList = (slot, data, showPic = true) => new SongList(slot, data, showPic)
 export const getMusicData = new GetMusicData()
 export const commonData = new CommonData()
-export const init=()=>{
+
+export const init = () => {
 	$('.cookie_form').hide()
+
 	$(function () {
+		let cookie = new SetCookie()
 		$.ajax({
-			method:'GET',
-			url:`http://localhost:3300/user/cookie`,
-			success:res=>{
+			method: 'GET',
+			url: `${api}user/cookie`,
+			success: res => {
+				console.log(res);
 				let qm_keyst = res.data.userCookie.qm_keyst
 				let uin = res.data.userCookie.uin
-				if(qm_keyst === undefined || uin === undefined){
-					tip.template('欢迎━(*｀∀´*)ノ亻! Cookie未设置','waring')
-					new SetCookie()
-				}else {
-					tip.template('欢迎━(*｀∀´*)ノ亻! Cookie获取成功','success')
-					$('.set_cookie').css({'background-color': `#E6A23C`}).text('清除cookie').click(()=>{
-						let cookie = new SetCookie()
+				if (qm_keyst === undefined || uin === undefined) {
+					tip.template('欢迎━(*｀∀´*)ノ亻! Cookie未设置', 'waring')
+					cookie.init()
+				} else {
+					tip.template('欢迎━(*｀∀´*)ノ亻! Cookie获取成功', 'success')
+					$('.set_cookie').css({ 'background-color': `#E6A23C` }).text('清除cookie').click(() => {
 						cookie.deleteCookie()
 					})
 				}
-				$ ('#player')
-					.hide ()
-				let tab = new Tab ('.nav_ul>li')
-				tab.activeLi ()
+				$('#player')
+					.hide()
+				let tab = new Tab('.nav_ul>li')
+				tab.activeLi()
 				tab.getCookie()
 				let search = new Search('.main')
 				search.init()
@@ -660,6 +673,10 @@ export const init=()=>{
 		})
 	})
 };
+export const api = `http://localhost:3300/`
+// export const api = `http://alivemusic.dreamsakula.top:3300/`
+
+
 
 
 

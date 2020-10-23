@@ -1,4 +1,4 @@
-import {load, songList} from "../component/app";
+import {api, load, songList} from "../component/app";
 
 
 export class DayRec{
@@ -15,7 +15,7 @@ export class DayRec{
 	getData(){
 		let _this = this
 		var settings = {
-			"url": "http://localhost:3300/recommend/daily",
+			"url": `${api}recommend/daily`,
 			"method": "GET",
 		};
 

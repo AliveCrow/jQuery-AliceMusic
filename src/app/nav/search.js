@@ -1,4 +1,4 @@
-import {load, getMusicData, commonData} from "../component/app";
+import {load, getMusicData, commonData,api} from "../component/app";
 
 export class Search {
 	constructor(slot) {
@@ -60,7 +60,7 @@ export class Search {
 	getData(keyword,pageNo =1) {
 		$.ajax ({
 			method: 'GET',
-			url: 'http://localhost:3300' + `/search?t=0&key=${keyword}&pageSize=20&pageNo=${pageNo}`,
+			url: `${api}` + `search?t=0&key=${keyword}&pageSize=20&pageNo=${pageNo}`,
 			success: res => {
 				$('.load_over').hide()
 				this.keyword = keyword

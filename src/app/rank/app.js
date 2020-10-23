@@ -1,4 +1,4 @@
-import {load, songList, getMusicData} from "../component/app";
+import {load, songList, getMusicData, api} from "../component/app";
 
 export class RenderRank {
 	constructor(slot) {//el要插入的元素
@@ -15,7 +15,7 @@ export class RenderRank {
 	init() {
 		$.ajax ({
 			method: 'GET',
-			url: 'http://localhost:3300' + '/top/category?showDetail=1',
+			url: `${api}` + 'top/category?showDetail=1',
 			dataType: 'json',
 			success: (res) => {
 				this.initTime = res.result
@@ -94,7 +94,7 @@ export class RenderRank {
 	getSongMid(amblumId,rank,imgurl){
 		$.ajax({
 			method:'GET',
-			url:`http://localhost:3300/top?id=${amblumId}&pageSize=10`,
+			url:`${api}top?id=${amblumId}&pageSize=10`,
 			success:res=>{
 				if(rank){
 					let songmid = res.data.list[rank-1].mid
