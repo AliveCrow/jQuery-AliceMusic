@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "scss": "sass --watch scss/app.scss:scss/dist/app.css",
-    "build": "rm -rf ./dist/ && webpack --config webpack.prod.config.js",
+    "build": "rm -rf ./dist/ && npx webpack --config webpack.prod.config.js",
     "start": "rm -rf ./dist/ && webpack-dev-server --open --config webpack.dev.config.js",
     "start:dev": "webpack-dev-server --open --config webpack.config.js"
   },

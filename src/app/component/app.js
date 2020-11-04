@@ -290,7 +290,7 @@ class Player {
 		let audio = document.createElement('audio')
 		audio.id = `Player-${new Date().getTime()}`
 		audio.src = `${this.musicData.PlayerUrl}`;
-		audio.volume = volume || 0.6
+		audio.volume = 0.5
 		document.body.appendChild(audio)
 		this.$audio = document.querySelector('audio')
 		$(this.$audio).on('canplaythrough', () => {
@@ -323,6 +323,7 @@ class Player {
 				<path d="M580.2 907.1c-20.2 0-39.6-6.2-56.2-17.8L308.8 731.8c-11.5-8-25.7-12.5-40.5-12.5h-74.4c-54 0-97.9-43.9-97.9-97.9V402.7c0-54 43.9-97.9 97.9-97.9h74.4c14.8 0 29-4.5 41.1-12.9l214.1-156.7c0.2-0.1 0.4-0.3 0.6-0.4 35.6-24.9 82.6-23.6 116.9 3.3 23.3 18.3 37.3 48 37.3 79.6v589.4c0 28-10.9 54.4-29.8 72.5-18.8 17.7-43 27.5-68.3 27.5zM193.9 375.6c-14.9 0-27.1 12.1-27.1 27.1v218.7c0 14.9 12.1 27.1 27.1 27.1h74.4c29.4 0 57.6 8.9 81.7 25.7l215.3 157.5c4 2.8 9.4 4.5 14.9 4.5 5 0 12.4-1.4 19.3-8 4.9-4.7 7.8-12.6 7.8-21.2V217.6c0-10-3.8-18.9-10.1-23.8-9.7-7.6-22.3-8.1-32.3-1.2L350.6 349.5c-24.7 17.3-52.9 26.2-82.3 26.2h-74.4z" fill="#ffffff" p-id="3384" data-spm-anchor-id="a313x.7781069.0.i9" class=""></path><path d="M837.7 694.9c-6.5 0-13.1-1.8-19-5.5-16.5-10.5-21.4-32.4-10.9-48.9 65.9-103.6 65.9-193.5-0.2-282.9-11.6-15.7-8.3-37.9 7.4-49.6s37.9-8.3 49.6 7.4c83.5 112.9 84.5 235.1 3 363.1-6.7 10.6-18.2 16.4-29.9 16.4zM498.2 618.3c-19.6 0-35.4-15.9-35.4-35.4V441.2c0-19.6 15.9-35.4 35.4-35.4 19.6 0 35.4 15.9 35.4 35.4v141.7c0 19.6-15.8 35.4-35.4 35.4z"  p-id="3385" data-spm-anchor-id="a313x.7781069.0.i6" class="volume_line"></path>
 			</svg>
 			<input type="range" class="volume_range" min="0" max="1" step="0.01" value="${volume}" >
+			<svg t="1603422989871" class="icon op" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1191" width="200" height="200"><path d="M707.584 93.184c-77.312 0-148.992 38.912-196.608 102.912-47.104-64-119.296-102.912-196.608-102.912-139.264 0-252.416 123.904-252.416 275.968 0 90.624 40.448 154.624 73.216 205.824C229.888 723.968 468.48 908.8 478.72 916.48c9.728 7.68 20.992 11.264 32.256 11.264s22.528-3.584 32.256-11.264c10.24-7.68 248.32-193.024 343.552-341.504 32.768-51.2 73.216-115.2 73.216-205.824 0-152.064-113.152-275.968-252.416-275.968zM821.76 573.44c-87.552 122.88-272.896 263.168-282.112 269.824-8.704 6.656-18.944 10.24-28.672 10.24-10.24 0-19.968-3.072-28.672-10.24-9.216-6.656-190.976-148.48-282.112-274.944-29.184-46.08-75.776-103.424-75.776-184.32 0-136.192 75.776-231.936 200.192-231.936 69.12 0 144.384 66.048 186.368 123.392 42.496-57.344 117.248-123.392 186.368-123.392 124.928 0 205.824 95.744 205.824 231.936 0 80.896-51.712 143.872-81.408 189.44z"  p-id="1192"></path></svg>
 			<div class="list_group">
 				<svg t="1603339918775" class="icon list" viewBox="0 0 1462 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4450" width="200" height="200"><path d="M1389.714286 146.285714H438.857143a73.142857 73.142857 0 1 1 0-146.285714h950.857143a73.142857 73.142857 0 1 1 0 146.285714zM731.428571 585.142857h-292.571428a73.142857 73.142857 0 0 1 0-146.285714h292.571428a73.142857 73.142857 0 0 1 0 146.285714z m658.285715 438.857143H438.857143a73.142857 73.142857 0 0 1 0-146.285714h950.857143a73.142857 73.142857 0 0 1 0 146.285714zM146.285714 146.285714H73.142857a73.142857 73.142857 0 1 1 0-146.285714h73.142857a73.142857 73.142857 0 0 1 0 146.285714z m0 438.857143H73.142857a73.142857 73.142857 0 1 1 0-146.285714h73.142857a73.142857 73.142857 0 0 1 0 146.285714z m0 438.857143H73.142857a73.142857 73.142857 0 1 1 0-146.285714h73.142857a73.142857 73.142857 0 0 1 0 146.285714z" p-id="4451"></path></svg>
 				<ul class="list_group_ul">
@@ -363,24 +364,36 @@ class Player {
 			$('.list_group_ul').slideToggle()
 		}) //播放列表展示
 		$('.volume_range').css('background-size', `${Math.floor(volume * 100)}%`).mouseenter(function () {
+			let adjVol = (e)=>{
+				let vol = e.offsetX <= 0 ? 0 : (e.offsetX >= 100 ? 100 : e.offsetX)
+				$(this).val(vol / 100)
+				$(this).css('background-size', `${vol}% 100%`)
+				_this.$audio.volume = e.offsetX < 1 ? 0 : (e.offsetX >= 100 ? 1 : e.offsetX / 100)
+			}
 			$(this).mousedown((e) => {
+				adjVol(e)
 				$(this).mousemove((e) => {
-					let vol = e.offsetX <= 0 ? 0 : (e.offsetX >= 100 ? 100 : e.offsetX)
-					$(this).val(vol / 100)
-					$(this).css('background-size', `${vol}% 100%`)
-					_this.$audio.volume = e.offsetX < 1 ? 0 : (e.offsetX >= 100 ? 1 : e.offsetX / 100)
+					adjVol(e)
 					$(this).mouseup((e) => {
 						_this.prev = $(this).val()
 						$(this).unbind('mousemove')
 					})
 				})
+
 			})
 			$(this).mouseup((e) => {
 				$(this).val(e.offsetX / 100)
 				$(this).css('background-size', `${e.offsetX}% 100%`)
 				$(this).unbind('mousemove')
 			})
+
+
+
 		})
+
+
+
+
 
 		$('.volume').click(function () {
 			if (_this.$audio.muted) {
@@ -569,7 +582,6 @@ class GetMusicData {
 				"Content-Type": "audio/mpeg"
 			},
 			success: res => {
-				console.log('2333');
 				if (res.result === 400) {
 					let tip = new Tip()
 					tip.template(`${res.errMsg}`, 'fail')
@@ -580,7 +592,7 @@ class GetMusicData {
 				this.PlayerUrl = res.data
 
 				let player = new Player(this)
-				player.createAudio(this.volume)
+				player.createAudio(0.5)
 				lyric.template()
 				lyric.getLyric(songmid)
 				commonData.playerListRender(songmid)
@@ -673,8 +685,8 @@ export const init = () => {
 		})
 	})
 };
-export const api = `http://localhost:3300/`
-// export const api = `http://alivemusic.dreamsakula.top:3300/`
+// export const api = `http://localhost:3300/`
+export const api = `http://alivemusic.dreamsakula.top:3300/`
 
 
 

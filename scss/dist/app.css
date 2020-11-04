@@ -102,7 +102,7 @@ nav input:-ms-input-placeholder {
   color: #c8c8c8;
   font-size: 14px;
 }
-nav .set_cookie {
+nav .set_cookie, nav .login {
   display: inline-block;
   cursor: pointer;
   color: #fff;
@@ -115,7 +115,7 @@ nav .set_cookie {
   border-color: #70ac00;
   font-size: 13px;
 }
-nav .set_cookie:hover {
+nav .set_cookie:hover, nav .login:hover {
   background-color: #67C23A;
 }
 nav .cookie_form {
@@ -404,6 +404,10 @@ nav .delete_cookie {
 }
 #player .player_prograss .player_right .player_right_top .volume:hover {
   fill: #E6A23C;
+}
+#player .player_prograss .player_right .player_right_top .op {
+  margin-left: 10px;
+  fill: #ffffff;
 }
 #player .player_prograss .player_right .player_right_top .list_group {
   position: relative;
