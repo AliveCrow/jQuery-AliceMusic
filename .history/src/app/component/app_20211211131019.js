@@ -364,7 +364,7 @@ class Player {
 			$('.list_group_ul').slideToggle()
 		}) //播放列表展示
 		$('.volume_range').css('background-size', `${Math.floor(volume * 100)}%`).mouseenter(function () {
-			let adjVol = (e) => {
+			let adjVol = (e)=>{
 				let vol = e.offsetX <= 0 ? 0 : (e.offsetX >= 100 ? 100 : e.offsetX)
 				$(this).val(vol / 100)
 				$(this).css('background-size', `${vol}% 100%`)
@@ -685,8 +685,8 @@ export const init = () => {
 		})
 	})
 };
-export const api = `http://localhost:3333/`
-// export const api = `http://alivemusic.dreamsakula.top:3300/`
+// export const api = `http://localhost:3300/`
+export const api = `http://alivemusic.dreamsakula.top:3300/`
 
 
 

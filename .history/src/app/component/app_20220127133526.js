@@ -685,7 +685,7 @@ export const init = () => {
 		})
 	})
 };
-export const api = `http://localhost:3333/`
+export const api = `http://localhost:3300/`
 // export const api = `http://alivemusic.dreamsakula.top:3300/`
 
 

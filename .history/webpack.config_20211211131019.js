@@ -1,9 +1,3 @@
-/*
- * @Description: 输入文件描述信息
- * @Author: liu-wb
- * @Date: 2021-12-11 13:10:20
- * @LastEditTime: 2022-01-27 13:41:54
- */
 var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -52,16 +46,16 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							name: "[hash].[ext]",
-							publicPath: "assets/img/",
-							outputPath: "assets/img/"
+							name:"[hash].[ext]",
+							publicPath:"assets/img/",
+							outputPath:"assets/img/"
 						}
 					}
 				]
 			},
 			{
-				test: /\.html$/i,
-				use: [{
+				test:/\.html$/i,
+				use:[{
 					loader: "html-loader"
 				}]
 			}

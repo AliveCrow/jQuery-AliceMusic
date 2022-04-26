@@ -2,7 +2,7 @@
  * @Description: 输入文件描述信息
  * @Author: liu-wb
  * @Date: 2021-12-11 13:10:20
- * @LastEditTime: 2022-01-27 13:41:54
+ * @LastEditTime: 2022-01-27 13:39:13
  */
 var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -19,13 +19,13 @@ module.exports = {
 		inline: false,
 		contentBase: './dist',
 	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			// title:'basd',
-			filename: 'index.html',
-			template: './index.html'
-		})
-	],
+	// plugins: [
+	// 	new HtmlWebpackPlugin({
+	// 		// title:'basd',
+	// 		filename: 'index.html',
+	// 		template: './index.html'
+	// 	})
+	// ],
 
 	module: {
 		rules: [

@@ -5,5 +5,7 @@
  * @LastEditTime: 2022-01-27 13:43:14
  */
 import '../scss/app.scss'
-import '../src/app/app.js'
+// import '../src/app/app.js'
 import img from './assets/img/logo.png'
+
+console.log(img)
